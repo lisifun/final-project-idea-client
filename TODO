@@ -1,0 +1,13 @@
+To Do
+
+- Create the models and routes for the backend (at least one model for Workspace, other for Ticket (with a ref to Workspace), other for Project (with a reference to Ticket))
+- Create a model User for the authentication. (this model has to have a username, email, password, photo)
+- Create the dashboard where the user is gonna see the tickets (options for filter and search)
+- Create the ticket card (add info about the ticket like status, label, priority, etc...)
+- Create the roadmap or at least a calendar where the user can see with more clarity the deadlines for the tickets
+- Add alerts when a ticket is close to the deadline.
+- Intregate the app with gitHub
+
+User flow
+
+- First the user needs to login or singup in the web app. If the user already has an account, the usera has to select a workspace and then the app is going to open in the dashboard, if the user has not an account the user needs to create a new workspace. Inside the dashboard he customer is gonna see all the tickets (the old ones), and is gonna to add new tickets and also add info about those tickets. 
