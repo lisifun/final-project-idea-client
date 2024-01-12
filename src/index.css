@@ -21,10 +21,21 @@ hr {
   width: 50vw;
 }
 
+.link {
+  text-decoration: none;
+  color: white;
+}
+
 /* Navbar */
 .navbar {
-  border: 0.5px solid #3b3c48;
+  border-bottom: 0.5px solid #3b3c48;
   padding: 2px 200px;
+}
+
+#features,
+#contact {
+  background-color: transparent;
+  border: none;
 }
 
 .dropdown-menu-features {
@@ -40,6 +51,17 @@ hr {
   background: linear-gradient(to bottom right, #15162d, #2f3143);
   color: white;
 }
+
+.loggin-button {
+  background-color: transparent;
+  border: transparent;
+}
+
+.singup-button,
+.profile-button {
+  background-color: #5c6ad2;
+  border: #5c6ad2;
+}
 /* Home Page */
 .home-info {
   display: flex;
@@ -48,7 +70,7 @@ hr {
 
   gap: 40px;
   padding: 128px;
-  border: 0.5px solid #3b3c48;
+  border-bottom: 0.5px solid #3b3c48;
 }
 
 .heading {
@@ -156,5 +178,6 @@ hr {
   margin-bottom: 40px;
   display: flex;
   gap: 40px;
-  background: linear-gradient(to bottom right, #15162d, #262632);
+  /* background: linear-gradient(to bottom right, #15162d, #262632); */
+  background: linear-gradient(to bottom right, #15162d, #2f3143);
 }
