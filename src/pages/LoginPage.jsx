@@ -3,6 +3,8 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 
+import Form from "react-bootstrap/Form";
+
 const Login = () => {
   const [user, setUser] = useState({
     email: "",
@@ -18,13 +20,13 @@ const Login = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     post("/auth/login", user)
       .then((response) => {
         storeToken(response.data.authToken);
         authenticateUser();
-        navigate("/");
+        navigate("/dashboard");
       })
       .catch((error) => {
         console.log(error);
@@ -32,9 +34,38 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h1>Signup</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="login-page">
+      <h1>Log in to TicketFlow</h1>
+      <Form onSubmit={handleSubmit} className="form-login">
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>
+            Email address<sup>*</sup>
+          </Form.Label>
+          <Form.Control
+            type="email"
+            name="email"
+            value={user.email}
+            onChange={handleTextInput}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>
+            Password<sup>*</sup>
+          </Form.Label>
+          <Form.Control
+            name="password"
+            type="password"
+            value={user.password}
+            onChange={handleTextInput}
+          />
+        </Form.Group>
+      </Form>
+      <button type="submit" onClick={handleSubmit}>
+        Log in
+      </button>
+
+      {/* <form onSubmit={handleSubmit}>
         <label>
           Email
           <input
@@ -55,7 +86,7 @@ const Login = () => {
         </label>
 
         <button type="submit">Login</button>
-      </form>
+      </form> */}
     </div>
   );
 };
