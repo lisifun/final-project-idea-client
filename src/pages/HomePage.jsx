@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import Button from "react-bootstrap/Button";
+
 const Home = () => {
   return (
     <div className="home-info">
@@ -13,10 +15,10 @@ const Home = () => {
         tracking, making project collaboration a breeze.
       </div>
 
-      <Link to="/login" style={{ textDecoration: "none" }}>
-        <button className="get-started-button">
+      <Link to="/login" className="link">
+        <Button className="getstarted-button">
           Get started <i className="fas fa-chevron-right"></i>
-        </button>
+        </Button>
       </Link>
     </div>
   );
