@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 
 import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const Signup = () => {
   const [newUser, setNewUser] = useState({
@@ -22,8 +23,6 @@ const Signup = () => {
   };
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
-
     post("/auth/signup", newUser)
       .then((response) => {
         storeToken(response.data.authToken);
@@ -87,46 +86,16 @@ const Signup = () => {
         </Form.Group>
       </Form>
 
-      <button
+      <Button
+        className="singup-button"
         type="submit"
         onClick={() => {
-          console.log("helloooo");
           handleSubmit();
         }}
+        variant="primary"
       >
         Sign up
-      </button>
-      {/* <form onSubmit={handleSubmit}>
-        <label>
-          Username
-          <input
-            name="username"
-            type="text"
-            value={newUser.username}
-            onChange={handleTextInput}
-          />
-        </label>
-        <label>
-          Email
-          <input
-            name="email"
-            type="email"
-            value={newUser.email}
-            onChange={handleTextInput}
-          />
-        </label>
-        <label>
-          Password
-          <input
-            name="password"
-            type="password"
-            value={newUser.password}
-            onChange={handleTextInput}
-          />
-        </label>
-
-        <button type="submit">Signup</button>
-      </form> */}
+      </Button>
     </div>
   );
 };
