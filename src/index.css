@@ -1,19 +1,8 @@
 body {
   height: 100vh;
   background: linear-gradient(to bottom right, #14122b, #3f3955);
+  /* background: linear-gradient(to bottom right, #000212, #13152f); */
   color: white;
-}
-
-button {
-  font-weight: 500;
-  display: flex;
-  background-color: #5c6ad2;
-  border: #5c6ad2;
-  align-items: center;
-  gap: 16px;
-  padding: 12px;
-  color: white;
-  border-radius: 32px;
 }
 
 hr {
@@ -33,37 +22,52 @@ hr {
 }
 
 #features,
-#contact {
+#contact,
+#workspace,
+#user,
+#options {
   background-color: transparent;
   border: none;
 }
 
-.dropdown-menu-features {
+.dropdown-menu-features,
+.dropdown-workspace {
   padding: 16px;
   width: 320px;
   background: linear-gradient(to bottom right, #15162d, #2f3143);
   color: white;
 }
 
-.dropdown-menu-contact {
+.dropdown-menu-contact,
+.dropdown-user {
   padding: 16px;
   width: 260px;
   background: linear-gradient(to bottom right, #15162d, #2f3143);
   color: white;
 }
 
-.loggin-button {
-  background-color: transparent;
+.loggin-button-home {
+  background-color: transparent !important;
   border: transparent;
 }
 
 .singup-button,
+.login-button,
 .profile-button,
 .logout-button,
-.getstarted-button {
+.getstarted-button,
+.update-button,
+.new-ticket-button,
+.inbox-button,
+.mytickets-button,
+.calendar-button,
+.edit-button,
+.delete-button,
+.comment-button {
   background-color: #5c6ad2;
   border: #5c6ad2;
 }
+
 /* Home Page */
 .home-info {
   display: flex;
@@ -103,7 +107,7 @@ hr {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 200px auto auto;
+  margin: 140px auto auto;
 }
 
 .form-singup,
@@ -156,12 +160,13 @@ hr {
   flex-direction: column;
   border-right: 0.5px solid #3b3c48;
   width: 16vw;
-  padding: 12px 0px;
+  padding: 12px 12px;
+  height: 100%;
 }
 
 .modal-ticket {
   bottom: 100px;
-  left: 640px;
+  left: 450px;
   border-radius: 16px;
   padding: 32px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -171,4 +176,57 @@ hr {
   gap: 40px;
   /* background: linear-gradient(to bottom right, #15162d, #262632); */
   background: linear-gradient(to bottom right, #15162d, #2f3143);
+}
+
+.modal-ticket-options {
+  top: 700px;
+  right: 350px;
+  background: linear-gradient(to bottom right, #15162d, #2f3143);
+  border-radius: 16px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+
+  padding: 12px;
+}
+
+.dropdown-toggle::after {
+  content: none;
+}
+
+.ticket-list {
+  padding: 2px;
+  border-right: 0.5px solid #3b3c48;
+}
+
+/* TicketCard */
+.ticket-card {
+  background: linear-gradient(to bottom right, #15162d, #2f3143);
+  border: 1px solid #3b3c48;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  width: 60vw;
+  height: 8vh;
+  border-radius: 4px;
+  margin-bottom: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+}
+
+.ticket-card-left,
+.ticket-card-right {
+  display: flex;
+  gap: 12px;
+}
+
+.ticket-card-left > div {
+  width: 6vw;
+  /* border: 1px solid white; */
+  display: flex;
+  align-items: center;
+}
+
+.ticket-card-right > div {
+  border: 1px solid #3b3c48;
+  border-radius: 16px;
+  padding: 2px 16px;
 }

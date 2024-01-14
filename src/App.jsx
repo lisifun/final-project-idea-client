@@ -13,6 +13,7 @@ import ProfilePage from "./pages/ProfilePage";
 import DashboardPage from "./pages/DashboardPage";
 import Footer from "./components/Footer";
 import WorkspacePage from "./pages/WorkspacePage";
+import TicketDetailsPage from "./pages/TicketDetailsPage";
 
 function App() {
   const { getToken } = useContext(AuthContext);
@@ -41,6 +42,10 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/dashboard" element={<DashboardPage />}></Route>
           <Route path="/workspace" element={<WorkspacePage />}></Route>
+          <Route
+            path="/dashboard/details/:ticketId"
+            element={<TicketDetailsPage />}
+          ></Route>
         </Route>
 
         {/* <Footer /> */}

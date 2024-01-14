@@ -37,7 +37,7 @@ function AuthProvider({ children }) {
           // If the server verifies that the JWT token is valid
           const user = response.data;
 
-          console.log("Authenticate User/Decoded Token ===>", user);
+          // console.log("Authenticate User/Decoded Token ===>", user);
           // Update state variables
           setIsLoading(false);
           setUser(user);
@@ -79,6 +79,7 @@ function AuthProvider({ children }) {
       value={{
         isLoading,
         user,
+        setUser,
         storeToken,
         authenticateUser,
         logOutUser,

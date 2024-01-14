@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 
 import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -20,8 +21,6 @@ const Login = () => {
   };
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
-
     post("/auth/login", user)
       .then((response) => {
         storeToken(response.data.authToken);
@@ -36,7 +35,7 @@ const Login = () => {
   return (
     <div className="login-page">
       <h1>Log in to TicketFlow</h1>
-      <Form onSubmit={handleSubmit} className="form-login">
+      <Form className="form-login">
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>
             Email address<sup>*</sup>
@@ -61,32 +60,15 @@ const Login = () => {
           />
         </Form.Group>
       </Form>
-      <button type="submit" onClick={handleSubmit}>
+
+      <Button
+        className="login-button"
+        type="submit"
+        onClick={handleSubmit}
+        variant="primary"
+      >
         Log in
-      </button>
-
-      {/* <form onSubmit={handleSubmit}>
-        <label>
-          Email
-          <input
-            name="email"
-            type="email"
-            value={user.email}
-            onChange={handleTextInput}
-          />
-        </label>
-        <label>
-          Password
-          <input
-            name="password"
-            type="password"
-            value={user.password}
-            onChange={handleTextInput}
-          />
-        </label>
-
-        <button type="submit">Login</button>
-      </form> */}
+      </Button>
     </div>
   );
 };

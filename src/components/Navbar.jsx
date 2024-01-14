@@ -74,7 +74,7 @@ const Navbar = () => {
         {!getToken() && (
           <>
             <Link to="/login" className="link">
-              <Button variant="primary" className="loggin-button">
+              <Button variant="primary" className="loggin-button-home">
                 Log in
               </Button>
             </Link>
