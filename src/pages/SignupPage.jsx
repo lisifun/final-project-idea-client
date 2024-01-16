@@ -27,10 +27,10 @@ const Signup = () => {
       .then((response) => {
         storeToken(response.data.authToken);
         authenticateUser();
-        navigate("/dashboard");
+        navigate("/workspace");
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.log(err);
       });
   };
 

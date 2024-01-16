@@ -1,29 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/auth.context";
-
-import Modal from "react-bootstrap/Modal";
-
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { SERVER_URL } from "../services/SERVER_URL";
 
-const TicketModal = () => {
-  const { user } = useContext(AuthContext);
-  const [allTickets, setAllTickets] = useState([]);
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Dropdown from "react-bootstrap/Dropdown";
+import Modal from "react-bootstrap/Modal";
+import DropdownStatus from "./DropdownStatus";
+import DropdownPriority from "./DropdownPriority";
+import DropdownLabel from "./DropdownLabel";
+import DropdownMember from "./DropdownMember";
+
+const TicketModal = ({ workspaceId }) => {
+  const [selectedWorkspace, setSelectedWorkspace] = useState(null);
+  const [allTickets, setAllTickets] = useState(null);
   const [newTicket, setNewTicket] = useState({
     title: "",
     description: "",
     status: "",
     priority: "",
-
-    // members: [String],
     label: "",
-    // project: { type: Schema.Types.ObjectId, ref: "Project" },
-    // deadline: { type: Date },
-    // workspace: { type: Schema.Types.ObjectId, ref: "Workspace" },
+    workspace: workspaceId,
+    assignee: "",
   });
 
   const navigate = useNavigate();
@@ -32,24 +31,31 @@ const TicketModal = () => {
     setNewTicket((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSelect = (e) => {
-    setNewTicket((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const handleStatusSelect = (eventKey) => {
+    setNewTicket((prev) => ({ ...prev, status: eventKey }));
+    
+
   };
 
-  const addNewTicket = () => {
-    axios
-      .post(SERVER_URL + "/tickets", newTicket)
-      .then((response) => {
-        setAllTickets([newTicket, ...allTickets]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const handlePrioritySelect = (eventKey) => {
+    setNewTicket((prev) => ({ ...prev, priority: eventKey }));
+ 
+  
+  };
+
+  const handleLabelSelect = (eventKey) => {
+    setNewTicket((prev) => ({ ...prev, label: eventKey }));
+   
+  };
+
+  const handleMemberSelect = (eventKey) => {
+    setNewTicket((prev) => ({ ...prev, assignee: eventKey }));
+ 
   };
 
   useEffect(() => {
     axios
-      .get(SERVER_URL + "/tickets")
+      .get(`${SERVER_URL}/tickets/${workspaceId}`)
       .then((response) => {
         setAllTickets(response.data);
       })
@@ -58,82 +64,93 @@ const TicketModal = () => {
       });
   }, []);
 
+  useEffect(() => {
+    axios
+      .get(`${SERVER_URL}/workspaces/${workspaceId}`)
+      .then((response) => {
+        setSelectedWorkspace(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const addNewTicket = () => {
+    axios
+      .post(`${SERVER_URL}/tickets/${workspaceId}`, newTicket)
+      .then((response) => {
+        setAllTickets([newTicket, ...allTickets]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+
   return (
     <>
-      <Modal.Dialog className="modal-ticket">
-        <Modal.Header
-          closeButton
-          onClick={() => {
-            navigate("/dashboard");
-          }}
-          style={{ marginBottom: "24px" }}
-        >
-          <Modal.Title>New ticket</Modal.Title>
-        </Modal.Header>
+      {selectedWorkspace && (
+        <Modal.Dialog className="modal-ticket">
+          <Modal.Header
+            closeButton
+            onClick={() => {
+              navigate(`/dashboard/${workspaceId}`);
+            }}
+            style={{ marginBottom: "24px" }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <div className="workspace-logo">
+                {selectedWorkspace.name.slice(0, 2).toUpperCase()}
+              </div>
 
-        <Modal.Body>
-          <Form style={{ marginBottom: "24px" }}>
-            <Form.Group className="mb-3">
-              <Form.Control
-                type="text"
-                name="title"
-                value={newTicket.title}
-                onChange={handleTextInput}
-                placeholder="Ticket title"
+              <div>New ticket</div>
+            </div>
+          </Modal.Header>
+
+          <Modal.Body>
+            <Form style={{ marginBottom: "24px" }}>
+              <Form.Group className="mb-3">
+                <Form.Control
+                  type="text"
+                  name="title"
+                  value={newTicket.title}
+                  onChange={handleTextInput}
+                  placeholder="Ticket title"
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Control
+                  type="text"
+                  name="description"
+                  value={newTicket.description}
+                  onChange={handleTextInput}
+                  placeholder="Ticket description..."
+                />
+              </Form.Group>
+            </Form>
+
+            <div style={{ display: "flex", gap: "12px", marginBottom: "24px" }}>
+              <DropdownStatus
+                handleStatusSelect={handleStatusSelect}
+                defaultValue={newTicket.status}
               />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Control
-                type="text"
-                name="description"
-                value={newTicket.description}
-                onChange={handleTextInput}
-                placeholder="Ticket description..."
+
+              <DropdownPriority
+                handlePrioritySelect={handlePrioritySelect}
+                defaultValue={newTicket.priority}
               />
-            </Form.Group>
-          </Form>
 
-          <div style={{ display: "flex", gap: "12px", marginBottom: "24px" }}>
-            <Form.Select
-              name="status"
-              id="todo"
-              style={{ width: "6vw" }}
-              onChange={handleSelect}
-              // value={newTicket.status}
-            >
-              <option>Todo</option>
-              <option value="Todo">Todo</option>
-              <option value="In-Progress">In-Progress</option>
-              <option value="In-Review">In-Review</option>
-              <option value="Done">Done</option>
-            </Form.Select>
+              <DropdownLabel
+                handleLabelSelect={handleLabelSelect}
+                defaultValue={newTicket.label}
+              />
 
-            <Form.Select
-              name="priority"
-              id="priority"
-              onChange={handleSelect}
-              style={{ width: "6vw" }}
-              // value={newTicket.priority}
-            >
-              <option>Priority</option>
-              <option value="No Priority">No Priority</option>
-              <option value="Urgent">Urgent</option>
-              <option value="High">High</option>
-              <option value="Medium">Medium</option>
-              <option value="Low">Low</option>
-            </Form.Select>
-
-            {/* <Form.Select
-              name="assignee"
-              id="assignee"
-              onChange={handleSelect}
-              style={{ width: "6vw" }}
-              value={newTicket.assignee}
-            >
-              <option>Assignee</option>
-            </Form.Select> */}
-
-            <Form.Select
+              <DropdownMember
+                handleMemberSelect={handleMemberSelect}
+                defaultValue={newTicket.assignee}
+                selectedWorkspace={selectedWorkspace}
+              />
+              {/* <Form.Select
               name="label"
               id="label"
               onChange={handleSelect}
@@ -144,35 +161,24 @@ const TicketModal = () => {
               <option value="Bug">Bug</option>
               <option value="Feature">Feature</option>
               <option value="Improvement">Improvement</option>
-            </Form.Select>
-
-            {/* <Form.Select
-              name="project"
-              id="project"
-              onChange={handleSelect}
-              style={{ width: "6vw" }}
-            >
-              <option>Project</option>
-              <option value="First Project">First Project</option>
-              <option value="Second Project">Second Project</option>
-              <option value="Final Project">Final Project</option>
             </Form.Select> */}
-          </div>
-        </Modal.Body>
+            </div>
+          </Modal.Body>
 
-        <Modal.Footer>
-          <Button
-            variant="primary"
-            className="new-ticket-button"
-            onClick={() => {
-              addNewTicket();
-              navigate("/dashboard");
-            }}
-          >
-            Create ticket
-          </Button>
-        </Modal.Footer>
-      </Modal.Dialog>
+          <Modal.Footer>
+            <Button
+              variant="primary"
+              className="create-ticket-button"
+              onClick={() => {
+                addNewTicket();
+                navigate(`/dashboard/${workspaceId}`);
+              }}
+            >
+              Create ticket
+            </Button>
+          </Modal.Footer>
+        </Modal.Dialog>
+      )}
     </>
   );
 };

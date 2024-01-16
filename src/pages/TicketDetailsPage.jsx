@@ -8,20 +8,40 @@ import TicketDetails from "../components/TicketDetails";
 import MoreTicketDetails from "../components/MoreTicketDetails";
 
 const TicketDetailsPage = () => {
+  const workspaceId = useParams().workspaceId;
+  const ticketId = useParams().ticketId;
+
   const [allTickets, setAllTickets] = useState([]);
   const [selectedTicket, setSelectedTicket] = useState(null);
   const [editedTicket, setEditedTicket] = useState(null);
-  const { ticketId } = useParams();
+  const [selectedWorkspace, setSelectedWorkspace] = useState(null);
+
+  
+
+
 
   useEffect(() => {
-    axios.get(SERVER_URL + "/tickets").then((response) => {
-      setAllTickets(response.data);
-    });
+    axios
+      .get(`${SERVER_URL}/workspaces/${workspaceId}`)
+      .then((response) => {
+        setSelectedWorkspace(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+
+  useEffect(() => {
+    axios
+      .get(`${SERVER_URL}/tickets/${workspaceId}/${ticketId}`)
+      .then((response) => {
+        setAllTickets(response.data);
+      });
   }, []);
 
   useEffect(() => {
     axios
-      .get(`${SERVER_URL}/tickets/${ticketId}`)
+      .get(`${SERVER_URL}/tickets/${workspaceId}/${ticketId}`)
       .then((response) => {
         setSelectedTicket(response.data);
         setEditedTicket(response.data);
@@ -33,7 +53,7 @@ const TicketDetailsPage = () => {
 
   const deleteTicket = (ticketId) => {
     axios
-      .delete(`${SERVER_URL}/tickets/${ticketId}`)
+      .delete(`${SERVER_URL}/tickets/${workspaceId}/${ticketId}`)
       .then((response) => {
         setAllTickets(
           allTickets.filter((ticket) => {
@@ -48,12 +68,12 @@ const TicketDetailsPage = () => {
 
   const updateTicket = (editedTicket) => {
     axios
-      .put(`${SERVER_URL}/tickets/${editedTicket._id}`, editedTicket)
+      .put(`${SERVER_URL}/tickets/${workspaceId}/${ticketId}`, editedTicket)
       .then((response) => {
         const udpdatedTickets = allTickets.map((ticket) => {
           return ticket._id === editedTicket._id ? response.data : ticket;
         });
-        console.log("udpdatedTickets so far => ", udpdatedTickets);
+
         setAllTickets(udpdatedTickets);
       })
       .catch((err) => {
@@ -62,9 +82,7 @@ const TicketDetailsPage = () => {
   };
 
   return (
-    <>
-     
-
+    <div className="ticket-details-page">
       {selectedTicket && (
         <div className="details-page" style={{ display: "flex" }}>
           <Sidebar />
@@ -80,10 +98,11 @@ const TicketDetailsPage = () => {
             editedTicket={editedTicket}
             setEditedTicket={setEditedTicket}
             onChange={updateTicket}
+            selectedWorkspace={selectedWorkspace}
           />
         </div>
       )}
-    </>
+    </div>
   );
 };
 

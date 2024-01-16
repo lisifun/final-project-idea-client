@@ -6,6 +6,12 @@ import Stack from "react-bootstrap/Stack";
 import Dropdown from "react-bootstrap/Dropdown";
 import Button from "react-bootstrap/Button";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import DropdownFeature from "./DropdownFeature";
+import DropdownContact from "./DropdownContact";
+
 const Navbar = () => {
   const { logOutUser, getToken } = useContext(AuthContext);
 
@@ -13,62 +19,18 @@ const Navbar = () => {
     <Stack direction="horizontal" gap={5} className="navbar">
       <Link className="link" to="/">
         <div className="p-2">
-          <div>
+          <div className="web-logo">
             <i className="fas fa-ticket-alt"></i>
             ticketflow
           </div>
         </div>
       </Link>
       <div className="p-2">
-        <Dropdown className="dropdown-features">
-          <Dropdown.Toggle id="features">Features</Dropdown.Toggle>
-
-          <Dropdown.Menu className="dropdown-menu-features">
-            <div>
-              <i className="fas fa-ticket-alt"></i>Tickets<br></br>{" "}
-              <p>Track your work</p>
-            </div>
-
-            <div>
-              <i className="fas fa-briefcase"></i>
-              Projects<br></br> <p>Collaborate on big ideas</p>
-            </div>
-
-            <div>
-              <i className="far fa-calendar"></i>
-              Calendar<br></br> <p>Plan your product</p>
-            </div>
-
-            <div>
-              <i className="far fa-comment-dots"></i>
-              Comments<br></br> <p>Communicate with your team members</p>
-            </div>
-          </Dropdown.Menu>
-        </Dropdown>
+        <DropdownFeature />
       </div>
 
       <div className="p-2">
-        <Dropdown>
-          <Dropdown.Toggle id="contact">Contact</Dropdown.Toggle>
-
-          <Dropdown.Menu className="dropdown-menu-contact">
-            <div>
-              <i className="fas fa-phone"></i>(425)546-6197
-            </div>
-
-            <div>
-              <i className="fas fa-envelope"></i>lisandrafj99@gmail.com
-            </div>
-
-            <div>
-              <i className="fab fa-github"></i>lisifun
-            </div>
-
-            <div>
-              <i className="fab fa-linkedin"></i>lisandrafj99@gmail.com
-            </div>
-          </Dropdown.Menu>
-        </Dropdown>
+        <DropdownContact />
       </div>
       <div className="p-2 ms-auto">
         {!getToken() && (
@@ -97,7 +59,6 @@ const Navbar = () => {
         {getToken() && (
           <>
             <Link to="/profile" className="link">
-              {" "}
               <Button variant="primary" className="profile-button">
                 Profile
               </Button>

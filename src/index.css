@@ -1,24 +1,34 @@
 body {
   height: 100vh;
-  background: linear-gradient(to bottom right, #14122b, #3f3955);
+  /* background: linear-gradient(to bottom right, #14122b, #3f3955); */
   /* background: linear-gradient(to bottom right, #000212, #13152f); */
-  color: white;
+  background-color: #191a23;
+  color: rgb(238, 239, 252);
+  /* font-family: Inter; */
+  font-family: "Inter", sans-serif;
 }
 
-hr {
+/* hr {
   color: gray;
   width: 50vw;
-}
+} */
 
 .link {
   text-decoration: none;
-  color: white;
+  color: rgb(238, 239, 252);
 }
 
 /* Navbar */
 .navbar {
   border-bottom: 0.5px solid #3b3c48;
-  padding: 2px 200px;
+  padding: 4px 200px;
+  background-color: #191a23;
+}
+
+.web-logo {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 #features,
@@ -30,20 +40,62 @@ hr {
   border: none;
 }
 
-.dropdown-menu-features,
-.dropdown-workspace {
+.dropdown-menu-features {
   padding: 16px;
-  width: 320px;
-  background: linear-gradient(to bottom right, #15162d, #2f3143);
-  color: white;
+  width: 22vw;
+  background: linear-gradient(to bottom right, #171830, #393b4f);
+  color: rgb(238, 239, 252);
+  border-radius: 10px;
+}
+
+.feature-tickets,
+.feature-projetcs,
+.feature-calendar,
+.feature-comments {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.feature-tickets > div,
+.feature-projetcs > div,
+.feature-calendar > div,
+.feature-comments > div {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.feature-tickets > p,
+.feature-projetcs > p,
+.feature-calendar > p,
+.feature-comments > p {
+  padding-left: 32px;
+  color: #81869b;
 }
 
 .dropdown-menu-contact,
-.dropdown-user {
+.dropdown-user,
+.dropdown-workspace {
   padding: 16px;
-  width: 260px;
-  background: linear-gradient(to bottom right, #15162d, #2f3143);
-  color: white;
+  /* width: 16vw; */
+  background: linear-gradient(to bottom right, #171830, #393b4f);
+  color: rgb(238, 239, 252);
+  border-radius: 10px;
+}
+
+.dropdown-menu-contact > div {
+  padding-bottom: 16px;
+}
+
+.contact-phone,
+.contact-email,
+.contact-github,
+.contact-linkedin {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
 }
 
 .loggin-button-home {
@@ -57,15 +109,110 @@ hr {
 .logout-button,
 .getstarted-button,
 .update-button,
-.new-ticket-button,
-.inbox-button,
-.mytickets-button,
-.calendar-button,
 .edit-button,
 .delete-button,
-.comment-button {
+.comment-button,
+.workspace-button,
+.assigness-button,
+.status-button,
+.labels-button,
+.priority-button,
+.create-ticket-button {
   background-color: #5c6ad2;
   border: #5c6ad2;
+  cursor: pointer;
+}
+.singup-button:hover,
+.login-button:hover,
+.profile-button:hover,
+.logout-button:hover,
+.getstarted-button:hover,
+.update-button:hover,
+.edit-button:hover,
+.delete-button:hover,
+.comment-button:hover,
+.workspace-button:hover,
+.assigness-button:hover,
+.status-button:hover,
+.labels-button:hover,
+.priority-button:hover,
+.create-ticket-button:hover {
+  background-color: #6b7bf1;
+}
+
+.inbox-button,
+.mytickets-button,
+.roadmaps-button,
+.views-button,
+.import-tickets-button,
+.invite-people-button,
+.cycles-button,
+.tickets-button,
+.active-button,
+.backlog-button,
+.projects-button,
+.bug-button,
+.feature-button,
+.improvement-button,
+.no-priority-button,
+.urgent-button,
+.high-button,
+.medium-button,
+.low-button {
+  background-color: transparent;
+  border: transparent;
+  width: 10vw;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.inbox-button:hover,
+.mytickets-button:hover,
+.roadmaps-button:hover,
+.views-button:hover,
+.import-tickets-button:hover,
+.invite-people-button:hover,
+.cycles-button:hover,
+.tickets-button:hover,
+.active-button:hover,
+.backlog-button:hover,
+.projects-button:hover,
+.bug-button:hover,
+.feature-button:hover,
+.improvement-button:hover,
+.no-priority-button:hover,
+.urgent-button:hover,
+.high-button:hover,
+.medium-button:hover,
+.low-button:hover {
+  background-color: #262736;
+  border: 0.5px solid #262736;
+}
+
+.new-ticket-button,
+.search-button,
+.status-filter,
+.label-filter,
+.priority-filter {
+  cursor: pointer;
+  background-color: #262733;
+  border: 0.5px solid #3b3c48;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 4vh;
+}
+
+.search-button:hover,
+.new-ticket-button:hover,
+.status-filter:hover,
+.label-filter:hover,
+.priority-filter:hover,
+#workspace:hover,
+#user:hover {
+  background-color: #262736;
+  border: 0.5px solid #262736;
 }
 
 /* Home Page */
@@ -118,6 +265,8 @@ hr {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   width: 30vw;
   margin-bottom: 40px;
+  background: linear-gradient(to bottom right, #171830, #393b4f);
+  /* background: linear-gradient(to bottom right, #15162d, #2f3143); */
 }
 
 /* Profile Page */
@@ -153,15 +302,49 @@ hr {
 }
 
 /* Dashboard */
+.dashboard-page {
+  background-color: #191a23;
+  height: 100vh;
+}
 
 /* Sidebar */
 .sidebar {
   display: flex;
   flex-direction: column;
   border-right: 0.5px solid #3b3c48;
-  width: 16vw;
+  width: 280px;
   padding: 12px 12px;
-  height: 100%;
+  height: 100vh;
+}
+
+.nav-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#workspace {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.workspace-user {
+  color: #81869b;
+  display: flex;
+  justify-content: space-between;
+}
+
+.workspace-logo {
+  background-color: #5c6ad2;
+  border-radius: 6px;
+  width: 30px;
+  height: 30px;
+  font-size: 0.8em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
 }
 
 .modal-ticket {
@@ -170,12 +353,14 @@ hr {
   border-radius: 16px;
   padding: 32px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  width: 40vw;
+  /* width: 580px; */
   margin-bottom: 40px;
   display: flex;
   gap: 40px;
   /* background: linear-gradient(to bottom right, #15162d, #262632); */
-  background: linear-gradient(to bottom right, #15162d, #2f3143);
+  /* background: linear-gradient(to bottom right, #15162d, #2f3143); */
+  background-color: #262733;
+  border: 0.5px solid #3b3c48;
 }
 
 .modal-ticket-options {
@@ -193,34 +378,32 @@ hr {
 }
 
 .ticket-list {
-  padding: 2px;
+  /* padding: 2px; */
   border-right: 0.5px solid #3b3c48;
+  width: 68vw;
 }
 
 /* TicketCard */
 .ticket-card {
-  background: linear-gradient(to bottom right, #15162d, #2f3143);
-  border: 1px solid #3b3c48;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  width: 60vw;
-  height: 8vh;
-  border-radius: 4px;
-  margin-bottom: 4px;
+  border-top: 0.8px solid #3b3c48;
+  border-bottom: 0.8px solid #3b3c48;
+  font-size: 0.86em;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px;
+  padding: 10px;
+  background-color: #191a23;
 }
 
 .ticket-card-left,
 .ticket-card-right {
   display: flex;
-  gap: 12px;
+  /* gap: px; */
 }
 
 .ticket-card-left > div {
-  width: 6vw;
-  /* border: 1px solid white; */
+  width: 2vw;
+  /* border: 1px solid (238, 239, 252); */
   display: flex;
   align-items: center;
 }
@@ -229,4 +412,315 @@ hr {
   border: 1px solid #3b3c48;
   border-radius: 16px;
   padding: 2px 16px;
+}
+
+.footer {
+  background-color: #191a23;
+}
+
+.ticket-status {
+  background-color: rgb(32, 33, 46);
+  padding: 2px 22px;
+  font-size: 15px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.count-tickets {
+  color: gray;
+}
+
+.status-option,
+.priority-option,
+.label-option,
+.assignee-option {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: rgb(238, 239, 252);
+}
+
+.ticket-title {
+  font-weight: 500;
+  font-size: 15px;
+  width: 10vw !important;
+}
+
+.ticket-details-page {
+  background-color: #191a23;
+  height: 100vh;
+}
+
+.ticket-details {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 60px;
+  border-right: 0.5px solid #3b3c48;
+  position: relative;
+  width: 68vw;
+  height: 100vh;
+}
+
+.ticket-details-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 16vh;
+}
+
+.ticket-details-input > form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.input-title {
+  font-size: 22px;
+  line-height: 1.6em;
+  font-weight: 500;
+  padding: 6px 14px;
+  background: transparent;
+  border: transparent;
+  color: rgb(238, 239, 252);
+  transition: none;
+  outline: none;
+  width: 50vw;
+  height: 47px;
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+
+.input-description {
+  padding: 6px 14px;
+  background-color: transparent;
+  border: transparent;
+  color: rgb(238, 239, 252);
+  transition: none;
+  outline: none;
+  width: 50vw;
+  line-height: 1.5rem;
+  font-size: 0.9375rem;
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+
+.activity-ticket {
+  padding: 30px 14px;
+}
+
+.user-photo {
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+}
+/* style={{ padding: "6px 14px" }} */
+
+.activity-heading {
+  font-style: normal;
+  text-align: left;
+  color: rgb(238, 239, 252);
+  line-height: 1.4375rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.username-photo {
+  display: flex;
+  gap: 20px;
+  margin-top: 24px;
+  align-items: center;
+}
+
+.photo-comment {
+  display: flex;
+  gap: 20px;
+}
+
+.comment-and-button {
+  border-radius: 16px;
+  border: 0.5px solid rgb(44, 46, 60);
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  background-color: rgb(32, 33, 46);
+}
+
+#comment {
+  width: 45vw;
+  background-color: rgb(32, 33, 46);
+  border: rgb(32, 33, 46);
+  transition: none;
+  outline: none;
+  padding: 6px 14px;
+  color: rgb(238, 239, 252);
+  resize: none;
+}
+
+.more-ticket-details {
+  background-color: #20212e;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 20px;
+  gap: 24px;
+  color: rgb(156, 158, 172);
+  font-style: normal;
+  text-align: left;
+  line-height: normal;
+  font-size: 15px;
+  font-weight: 500;
+  width: 270px;
+  height: 100vh;
+}
+
+.ticket-detail-select {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+#status,
+#priority,
+#assignee,
+#label {
+  align-items: center;
+  border: 0.5px solid #3b3c48;
+  line-height: 1;
+  flex-grow: 0;
+  flex-shrink: 0;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 1px;
+  background-color: rgba(82, 82, 121, 0.25);
+  position: relative;
+}
+
+.menu-status,
+.menu-priority,
+.menu-label,
+.menu-assignee {
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #262733;
+  border: 0.5px solid #3b3c48;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(
+    82,
+    82,
+    121,
+    0.25
+  ) !important; /* Change hover background color as needed */
+  color: rgb(238, 239, 252);
+}
+
+.accordion-item {
+  background-color: transparent;
+  border: transparent;
+}
+
+/* .accordion-header {
+  color: rgb(238, 239, 252);
+} */
+
+/* .accordion-body {
+  background-color: transparent;
+} */
+
+.accordion-button {
+  background-color: transparent;
+  color: rgb(238, 239, 252);
+  border: transparent;
+}
+
+.accordion-button:not(.collapsed) {
+  padding-left: 14px;
+  color: rgb(238, 239, 252);
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0px;
+}
+
+.accordion-button {
+  padding: 0.355rem;
+  border-radius: 0.355rem;
+  width: 10vw;
+  height: 4vh;
+  padding-left: 14px;
+}
+.accordion-button:not(.collapsed) {
+  padding-left: 14px;
+  color: rgb(238, 239, 252);
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0.355rem;
+  border-radius: 0.355rem;
+}
+
+.accordion-button:hover {
+  background-color: #262736;
+  border: 0.5px solid #262736;
+}
+
+.ticket-card:hover {
+  background-color: #1c1d2a;
+}
+
+.dashboard-filter {
+  width: 280px;
+  /* border: 1px solid green; */
+}
+
+/* Workspace Details Page */
+.workspace-details-page {
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+  margin-left: 400px;
+  margin-right: 400px;
+  width: 50vw;
+  justify-content: center;
+  align-items: baseline;
+  align-self: center;
+}
+
+/* .workspace-header {
+  display: flex;
+  flex: initial;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+} */
+
+/* .workspace-heading {
+  line-height: 2rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: -0.01rem;
+} */
+
+/* .workspace-orientation {
+  font-style: normal;
+  text-align: left;
+  color: rgb(133, 134, 153);
+  line-height: normal;
+  font-size: 0.8125rem;
+  font-weight: 500;
+} */
+
+.horizontal-line {
+  border-top: 1px solid rgb(44, 45, 60);
+  margin: 24px 0px;
+  width: 50vw;
+}
+
+.form-control {
+  color: rgb(238, 239, 252);
+  background-color: #151621;
+  border: 1px solid rgb(49, 50, 72);
+  height: 32px;
+  padding: 6px 12px;
+  width: auto;
 }

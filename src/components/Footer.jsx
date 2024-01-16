@@ -2,8 +2,8 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div>
-      <div style={{ color: "white" }}>
+    <div className="footer">
+      <div style={{ color: 'rgb(238, 239, 252)' }}>
         {" "}
         <i className="fas fa-ticket-alt"></i>
         ticketflow

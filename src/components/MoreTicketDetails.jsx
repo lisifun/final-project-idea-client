@@ -1,15 +1,35 @@
 import React, { useEffect } from "react";
 
-import Form from "react-bootstrap/Form";
+import DropdownStatus from "./DropdownStatus";
+import DropdownPriority from "./DropdownPriority";
+import DropdownLabel from "./DropdownLabel";
+import DropdownMember from "./DropdownMember";
 
 const MoreTicketDetails = ({
   selectedTicket,
   editedTicket,
   setEditedTicket,
   onChange,
+  selectedWorkspace,
 }) => {
-  const handleSelect = (e) => {
-    setEditedTicket((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  // const handleSelect = (e) => {
+  //   setEditedTicket((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  // };
+
+  const handleStatusSelect = (eventKey) => {
+    setEditedTicket((prev) => ({ ...prev, status: eventKey }));
+  };
+
+  const handlePrioritySelect = (eventKey) => {
+    setEditedTicket((prev) => ({ ...prev, priority: eventKey }));
+  };
+
+  const handleLabelSelect = (eventKey) => {
+    setEditedTicket((prev) => ({ ...prev, label: eventKey }));
+  };
+
+  const handleMemberSelect = (eventKey) => {
+    setEditedTicket((prev) => ({ ...prev, assignee: eventKey }));
   };
 
   useEffect(() => {
@@ -19,53 +39,30 @@ const MoreTicketDetails = ({
   return (
     <div>
       {editedTicket && (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            marginTop: "24px",
-            padding: "24px",
-            gap: "24px",
-          }}
-        >
-          <div style={{ display: "flex", gap: "100px", alignItems: "center" }}>
+        <div className="more-ticket-details">
+          <div className="ticket-detail-select">
             <div style={{ width: "50px" }}>Status</div>
-            <Form.Select
-              name="status"
-              id="todo"
-              style={{ width: "6vw" }}
-              onChange={handleSelect}
-              value={editedTicket.status}
-              defaultValue={selectedTicket.status}
-            >
-              <option value="Todo">Todo</option>
-              <option value="In-Progress">In-Progress</option>
-              <option value="In-Review">In-Review</option>
-              <option value="Done">Done</option>
-            </Form.Select>
+            <DropdownStatus
+              handleStatusSelect={handleStatusSelect}
+              defaultValue={editedTicket.status}
+            />
           </div>
 
-          <div style={{ display: "flex", gap: "100px", alignItems: "center" }}>
+          <div className="ticket-detail-select">
             <div style={{ width: "50px" }}>Priority</div>
-            <Form.Select
-              name="priority"
-              id="priority"
-              onChange={handleSelect}
-              style={{ width: "6vw" }}
-              value={editedTicket.priority}
-              defaultValue={selectedTicket.priority}
-            >
-              <option value="No Priority">No Priority</option>
-              <option value="Urgent">Urgent</option>
-              <option value="High">High</option>
-              <option value="Medium">Medium</option>
-              <option value="Low">Low</option>
-            </Form.Select>
+            <DropdownPriority
+              handlePrioritySelect={handlePrioritySelect}
+              defaultValue={editedTicket.priority}
+            />
           </div>
 
-          <div style={{ display: "flex", gap: "100px", alignItems: "center" }}>
+          <div className="ticket-detail-select">
             <div style={{ width: "50px" }}>Label</div>
-            <Form.Select
+            <DropdownLabel
+              handleLabelSelect={handleLabelSelect}
+              defaultValue={editedTicket.label}
+            />
+            {/* <Form.Select
               name="label"
               id="label"
               onChange={handleSelect}
@@ -76,26 +73,16 @@ const MoreTicketDetails = ({
               <option value="Bug">Bug</option>
               <option value="Feature">Feature</option>
               <option value="Improvement">Improvement</option>
-            </Form.Select>
+            </Form.Select> */}
           </div>
-          <hr style={{ width: "30vw" }}></hr>
 
-          <div style={{ display: "flex", gap: "100px", alignItems: "center" }}>
-            <div style={{ width: "50px" }}>Project</div>
-            <Form.Select
-              name="project"
-              id="project"
-              //   onChange={handleSelect}
-              style={{ width: "6vw" }}
-              // value={newTicket.priority}
-              defaultValue={selectedTicket.priority}
-            >
-              <option value="No Priority">Final Project</option>
-              <option value="Urgent">Second Project</option>
-              <option value="New Project">
-                <i className="fas fa-plus"></i>Create new project
-              </option>
-            </Form.Select>
+          <div className="ticket-detail-select">
+            <div style={{ width: "50px" }}>Assignee</div>
+            <DropdownMember
+              handleMemberSelect={handleMemberSelect}
+              defaultValue={editedTicket.assignee}
+              selectedWorkspace={selectedWorkspace}
+            />
           </div>
         </div>
       )}

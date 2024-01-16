@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
+import { useNavigate } from "react-router-dom";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -8,6 +9,8 @@ import Form from "react-bootstrap/Form";
 const Profile = () => {
   const { user, setUser } = useContext(AuthContext);
   const [editedUser, setEditedUser] = useState(user);
+
+  const navigate = useNavigate();
 
   const handleTextInput = (e) => {
     setEditedUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -75,7 +78,9 @@ const Profile = () => {
           <Button
             variant="primary"
             className="update-button"
-            onClick={updatedUserInfo}
+            onClick={() => {
+              updatedUserInfo;
+            }}
           >
             Update
           </Button>

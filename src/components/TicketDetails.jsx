@@ -22,83 +22,38 @@ const TicketDetails = ({
   }, [editedTicket]);
 
   return (
-    <div style={{ display: "flex" }}>
+    <div>
       {editedTicket && (
-        <div
-          className="ticket-details"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            marginTop: "24px",
-            padding: "24px",
-            borderRight: "0.5px solid #3b3c48",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              width: "50vw",
-              justifyContent: "space-between",
-              alignItems: "flex-start",
-            }}
-          >
-            <form
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "12px",
-              }}
-            >
+        <div className="ticket-details">
+          <div className="ticket-details-input">
+            <form>
               <input
+                className="input-title"
                 type="text"
                 name="title"
                 value={editedTicket.title}
                 onChange={handleTextInput}
-                style={{
-                  fontSize: "22px",
-                  fontWeight: "500",
-                  padding: "6px 14px",
-                  backgroundColor: "transparent",
-                  border: "transparent",
-                  color: "white",
-                  transition: "none",
-                  outline: "none",
-                }}
                 required
               />
               {selectedTicket.description && (
                 <input
+                  className="input-description"
                   type="text"
                   name="description"
                   value={editedTicket.description}
                   onChange={handleTextInput}
                   required
-                  style={{
-                    padding: "6px 14px",
-                    backgroundColor: "transparent",
-                    border: "transparent",
-                    color: "white",
-                    transition: "none",
-                    outline: "none",
-                  }}
                 />
               )}
               {!selectedTicket.description && (
                 <input
+                  className="input-description"
                   type="text"
                   name="description"
                   placeholder="Add description..."
                   value={editedTicket.description}
                   onChange={handleTextInput}
                   required
-                  style={{
-                    padding: "6px 14px",
-                    backgroundColor: "transparent",
-                    border: "transparent",
-                    color: "white",
-                    transition: "none",
-                    outline: "none",
-                  }}
                 />
               )}
             </form>
@@ -110,64 +65,35 @@ const TicketDetails = ({
           </div>
 
           <hr></hr>
+          <div style={{ borderRight: "0.5px solid #3b3c48" }}></div>
 
-          <div style={{ padding: "6px 14px" }}>
-            <div>Activity</div>
+          <div className="activity-ticket">
             {user && (
               <div>
                 <div
-                  style={{ display: "flex", gap: "20px", marginTop: "24px" }}
+                  style={{ display: "flex", justifyContent: "space-between" }}
                 >
-                  <img
-                    src={user.photo}
-                    style={{
-                      width: "25px",
-                      height: "25px",
-                      borderRadius: "50px",
-                    }}
-                  />
+                  <div className="activity-heading">Activity</div>
+                  <img src={user.photo} className="user-photo" />
+                </div>
+                <div className="username-photo">
+                  <img src={user.photo} className="user-photo" />
                   <div>{user.username}</div>
                 </div>
                 <br></br>
-                <div style={{ display: "flex", gap: "20px" }}>
-                  <img
-                    src={user.photo}
-                    style={{
-                      width: "30px",
-                      height: "30px",
-                      borderRadius: "50px",
-                    }}
-                  />
-                  <div
-                    style={{
-                      borderRadius: "16px",
-                      border: "1px solid #3b3c48",
-                      display: "flex",
-                      flexDirection: "column",
-                      padding: "12px",
-                    }}
-                  >
+                <div className="photo-comment">
+                  <img className="user-photo" src={user.photo} />
+                  <div className="comment-and-button">
                     <textarea
                       id="comment"
                       name="comment"
-                      rows="4"
+                      rows="2"
                       placeholder="Leave a comment..."
-                      style={{
-                        width: "45vw",
-                        backgroundColor: "transparent",
-                        border: "none",
-                        transition: "none",
-                        outline: "none",
-                        padding: "6px 14px",
-                        color: "white",
-                        resize: "none",
-                      }}
                     ></textarea>
                     <Button
                       variant="primary"
                       className="comment-button"
-                      //   onClick={updatedUserInfo}
-                      style={{ alignSelf: "flex-end" }}
+                      style={{ alignSelf: "flex-end", margin: "10px" }}
                     >
                       Comment
                     </Button>

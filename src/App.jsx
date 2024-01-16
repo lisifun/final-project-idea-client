@@ -14,6 +14,7 @@ import DashboardPage from "./pages/DashboardPage";
 import Footer from "./components/Footer";
 import WorkspacePage from "./pages/WorkspacePage";
 import TicketDetailsPage from "./pages/TicketDetailsPage";
+import WorkspaceDetailsPage from "./pages/WorkspaceDetailsPage";
 
 function App() {
   const { getToken } = useContext(AuthContext);
@@ -40,11 +41,18 @@ function App() {
 
         <Route element={<IsLoggedIn />}>
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/dashboard" element={<DashboardPage />}></Route>
+          <Route
+            path="/dashboard/:workspaceId"
+            element={<DashboardPage />}
+          ></Route>
           <Route path="/workspace" element={<WorkspacePage />}></Route>
           <Route
-            path="/dashboard/details/:ticketId"
+            path="/dashboard/:workspaceId/:ticketId/details"
             element={<TicketDetailsPage />}
+          ></Route>
+          <Route
+            path="/dashboard/:workspaceId/details"
+            element={<WorkspaceDetailsPage />}
           ></Route>
         </Route>
 

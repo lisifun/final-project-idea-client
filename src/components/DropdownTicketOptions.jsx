@@ -1,9 +1,10 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import Dropdown from "react-bootstrap/Dropdown";
 
 const DropdownTicketOptions = ({ selectedTicket, onDelete }) => {
+  const workspaceId = useParams();
   const navigate = useNavigate();
   return (
     <Dropdown className="dropdown-ticket-options" style={{ width: "2vw" }}>
@@ -21,7 +22,7 @@ const DropdownTicketOptions = ({ selectedTicket, onDelete }) => {
         <Dropdown.Item
           onClick={() => {
             onDelete(selectedTicket._id);
-            navigate("/dashboard");
+            navigate(`/dashboard/${workspaceId}`);
           }}
         >
           <i className="fas fa-trash-alt"></i> Delete
