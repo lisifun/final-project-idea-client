@@ -14,8 +14,6 @@ const DashboardFilter = ({
   const [labelClicking, setLabelClicking] = useState(false);
   const [priorityClicking, setPriorityClicking] = useState(false);
 
-
-
   return (
     <div className="dashboard-filter">
       <div
@@ -55,7 +53,7 @@ const DashboardFilter = ({
           <ToggleButton
             className="status-filter"
             id="tbg-radio-1"
-            value={2}
+            value={1}
             onClick={() => {
               setStatusClicking(true);
               setLabelClicking(false);
@@ -70,7 +68,7 @@ const DashboardFilter = ({
             id="tbg-radio-2"
             value={2}
             onClick={() => {
-              setStatusClicking(false);
+              // setStatusClicking(false);
               setLabelClicking(true);
               setPriorityClicking(false);
             }}
@@ -82,7 +80,7 @@ const DashboardFilter = ({
             id="tbg-radio-3"
             value={3}
             onClick={() => {
-              setStatusClicking(false);
+              // setStatusClicking(false);
               setLabelClicking(false);
               setPriorityClicking(true);
             }}

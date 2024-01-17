@@ -1,12 +1,11 @@
-import { post } from "../services/authService";
+import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { post } from "../services/authService";
 import { AuthContext } from "../context/auth.context";
-
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import axios from "axios";
 import { SERVER_URL } from "../services/SERVER_URL";
+
+import Button from "react-bootstrap/Button";
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -49,32 +48,40 @@ const Login = () => {
   return (
     <div className="login-page">
       <h1>Log in to TicketFlow</h1>
-      <Form className="form-login">
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>
-            Email address<sup>*</sup>
-          </Form.Label>
-          <Form.Control
-            type="email"
-            name="email"
-            value={user.email}
-            onChange={handleTextInput}
-            className="input"
-          />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>
-            Password<sup>*</sup>
-          </Form.Label>
-          <Form.Control
-            name="password"
-            type="password"
-            value={user.password}
-            onChange={handleTextInput}
-          />
-        </Form.Group>
-      </Form>
+      <div className="form-login">
+        <div className="input-group">
+          <form>
+            <input
+              className="input"
+              id="email"
+              type="email"
+              name="email"
+              value={user.email}
+              onChange={handleTextInput}
+              required
+            ></input>
+            <label className="label" for="email">
+              Email adress
+            </label>
+          </form>
+        </div>
+        <div className="input-group">
+          <form>
+            <input
+              className="input"
+              id="password"
+              type="password"
+              name="password"
+              value={user.password}
+              onChange={handleTextInput}
+              required
+            ></input>
+            <label className="label" for="password">
+              Password
+            </label>
+          </form>
+        </div>
+      </div>
 
       <Button
         className="login-button"

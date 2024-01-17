@@ -3,12 +3,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 
 import Stack from "react-bootstrap/Stack";
-import Dropdown from "react-bootstrap/Dropdown";
 import Button from "react-bootstrap/Button";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fas } from "@fortawesome/free-solid-svg-icons";
-import { library } from "@fortawesome/fontawesome-svg-core";
 import DropdownFeature from "./DropdownFeature";
 import DropdownContact from "./DropdownContact";
 

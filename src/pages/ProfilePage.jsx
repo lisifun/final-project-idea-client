@@ -18,29 +18,40 @@ const Profile = () => {
 
   const updatedUserInfo = () => {
     // setUser(editedUser);
-    // axios.put(`${SERVER_URL}/`);
+    // axios.put(`${SERVER_URL}/auth/login`)
   };
 
   return (
     <>
       {user && (
-        <div className="profile-page">
-          <h1>Profile</h1>
-          <p>Manage your TicketFlow profile</p>
-          <hr></hr>
+        <div className="profile-details-page">
+          <h2>Profile</h2>
+          <div>Manage your TicketFlow profile</div>
+
+          <div className="horizontal-line"></div>
+
           <div className="profile-info">
             <div className="profile-photo">
-              <b>Profile picture</b>
+              <div>Profile picture</div>
               <img src={user.photo} />
             </div>
             <div className="profile-email">
-              <b>Email</b>
-              <p>{editedUser.email}</p>
+              <div>Email</div>
+              <div>{editedUser.email}</div>
             </div>
+          </div>
 
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "baseline",
+              gap: "16px",
+            }}
+          >
             <Form.Group className="mb-3" style={{ width: "50vw" }}>
               <Form.Label>
-                <b>Full name</b>
+                <div>Full name</div>
               </Form.Label>
               <Form.Control
                 type="text"
@@ -53,7 +64,7 @@ const Profile = () => {
 
             <Form.Group className="mb-3" style={{ width: "50vw" }}>
               <Form.Label>
-                <b>Username</b>
+                <div>Username</div>
               </Form.Label>
               <Form.Control
                 type="text"
@@ -63,27 +74,16 @@ const Profile = () => {
                 required
               />
             </Form.Group>
-
-            {/* <div className="profile-fullname">
-              <b>Full Name</b>
-              <p>{user.fullName}</p>
-            </div> */}
-
-            {/* <div className="profile-username">
-              <b>Username</b>
-              <p>{user.username}</p>
-            </div> */}
+            <Button
+              variant="primary"
+              className="update-button"
+              onClick={() => {
+                updatedUserInfo();
+              }}
+            >
+              Update
+            </Button>
           </div>
-
-          <Button
-            variant="primary"
-            className="update-button"
-            onClick={() => {
-              updatedUserInfo;
-            }}
-          >
-            Update
-          </Button>
         </div>
       )}
     </>

@@ -3,7 +3,6 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 
-import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 const Signup = () => {
@@ -38,53 +37,72 @@ const Signup = () => {
     <div className="singup-page">
       <h1>Sign up</h1>
 
-      <Form onSubmit={handleSubmit} className="form-singup">
-        <Form.Group className="mb-3" controlId="formBasicFullName">
-          <Form.Label>
-            Full name<sup>*</sup>
-          </Form.Label>
-          <Form.Control
-            name="fullName"
-            type="text"
-            value={newUser.fullName}
-            onChange={handleTextInput}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicUsername">
-          <Form.Label>
-            Username<sup>*</sup>
-          </Form.Label>
-          <Form.Control
-            name="username"
-            type="text"
-            value={newUser.username}
-            onChange={handleTextInput}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>
-            Email address<sup>*</sup>
-          </Form.Label>
-          <Form.Control
-            name="email"
-            type="email"
-            value={newUser.email}
-            onChange={handleTextInput}
-          />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>
-            Password<sup>*</sup>
-          </Form.Label>
-          <Form.Control
-            name="password"
-            type="password"
-            value={newUser.password}
-            onChange={handleTextInput}
-          />
-        </Form.Group>
-      </Form>
+      <div className="form-singup">
+        <div className="input-group">
+          <form>
+            <input
+              className="input"
+              id="fullName"
+              name="fullName"
+              type="text"
+              value={newUser.fullName}
+              onChange={handleTextInput}
+              required
+            ></input>
+            <label className="label" for="fullName">
+              Full name
+            </label>
+          </form>
+        </div>
+        <div className="input-group">
+          <form>
+            <input
+              className="input"
+              id="username"
+              name="username"
+              type="text"
+              value={newUser.username}
+              onChange={handleTextInput}
+              required
+            ></input>
+            <label className="label" for="username">
+              Username
+            </label>
+          </form>
+        </div>
+        <div className="input-group">
+          <form>
+            <input
+              className="input"
+              id="email"
+              type="email"
+              name="email"
+              value={newUser.email}
+              onChange={handleTextInput}
+              required
+            ></input>
+            <label className="label" for="email">
+              Email adress
+            </label>
+          </form>
+        </div>
+        <div className="input-group">
+          <form>
+            <input
+              className="input"
+              id="password"
+              type="password"
+              name="password"
+              value={newUser.password}
+              onChange={handleTextInput}
+              required
+            ></input>
+            <label className="label" for="password">
+              Password
+            </label>
+          </form>
+        </div>
+      </div>
 
       <Button
         className="singup-button"
@@ -101,3 +119,31 @@ const Signup = () => {
 };
 
 export default Signup;
+
+{
+  /* <Form>
+<Form.Group className="mb-3">
+  <div>Member's name</div>
+  <Form.Control
+    type="text"
+    name="memberName"
+    value={newMember.memberName}
+    onChange={handleNewMemberInput}
+    required
+    placeholder="Member's name"
+  />
+</Form.Group>
+
+<Form.Group className="mb-3" style={{ width: "50vw" }}>
+  <div>Member's email</div>
+  <Form.Control
+    type="email"
+    name="memberEmail"
+    value={newMember.memberEmail}
+    onChange={handleNewMemberInput}
+    required
+    placeholder="Member's email"
+  />
+</Form.Group>
+</Form> */
+}

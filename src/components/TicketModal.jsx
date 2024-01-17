@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { SERVER_URL } from "../services/SERVER_URL";
 
-import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Dropdown from "react-bootstrap/Dropdown";
 import Modal from "react-bootstrap/Modal";
 import DropdownStatus from "./DropdownStatus";
 import DropdownPriority from "./DropdownPriority";
 import DropdownLabel from "./DropdownLabel";
 import DropdownMember from "./DropdownMember";
 
-const TicketModal = ({ workspaceId }) => {
+const TicketModal = ({ workspaceId, showModal, setShowModal }) => {
   const [selectedWorkspace, setSelectedWorkspace] = useState(null);
   const [allTickets, setAllTickets] = useState(null);
   const [newTicket, setNewTicket] = useState({
@@ -25,7 +23,7 @@ const TicketModal = ({ workspaceId }) => {
     assignee: "",
   });
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleTextInput = (e) => {
     setNewTicket((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -33,24 +31,18 @@ const TicketModal = ({ workspaceId }) => {
 
   const handleStatusSelect = (eventKey) => {
     setNewTicket((prev) => ({ ...prev, status: eventKey }));
-    
-
   };
 
   const handlePrioritySelect = (eventKey) => {
     setNewTicket((prev) => ({ ...prev, priority: eventKey }));
- 
-  
   };
 
   const handleLabelSelect = (eventKey) => {
     setNewTicket((prev) => ({ ...prev, label: eventKey }));
-   
   };
 
   const handleMemberSelect = (eventKey) => {
     setNewTicket((prev) => ({ ...prev, assignee: eventKey }));
- 
   };
 
   useEffect(() => {
@@ -86,7 +78,6 @@ const TicketModal = ({ workspaceId }) => {
       });
   };
 
-
   return (
     <>
       {selectedWorkspace && (
@@ -94,7 +85,8 @@ const TicketModal = ({ workspaceId }) => {
           <Modal.Header
             closeButton
             onClick={() => {
-              navigate(`/dashboard/${workspaceId}`);
+              setShowModal(!showModal);
+              // navigate(`/dashboard/${workspaceId}`);
             }}
             style={{ marginBottom: "24px" }}
           >
@@ -108,26 +100,49 @@ const TicketModal = ({ workspaceId }) => {
           </Modal.Header>
 
           <Modal.Body>
-            <Form style={{ marginBottom: "24px" }}>
-              <Form.Group className="mb-3">
-                <Form.Control
-                  type="text"
-                  name="title"
-                  value={newTicket.title}
-                  onChange={handleTextInput}
-                  placeholder="Ticket title"
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Control
-                  type="text"
-                  name="description"
-                  value={newTicket.description}
-                  onChange={handleTextInput}
-                  placeholder="Ticket description..."
-                />
-              </Form.Group>
-            </Form>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "20px",
+                marginBottom: "20px",
+              }}
+            >
+              <div className="input-group">
+                <form>
+                  <input
+                    className="input"
+                    id="title"
+                    type="text"
+                    name="title"
+                    value={newTicket.title}
+                    onChange={handleTextInput}
+                    required
+                    style={{ width: "30vw " }}
+                  ></input>
+                  <label className="label" for="title">
+                    Ticket title
+                  </label>
+                </form>
+              </div>
+              <div className="input-group">
+                <form>
+                  <input
+                    className="input"
+                    id="description"
+                    type="text"
+                    name="description"
+                    value={newTicket.description}
+                    onChange={handleTextInput}
+                    required
+                    style={{ width: "30vw " }}
+                  ></input>
+                  <label className="label" for="description">
+                    Ticket description
+                  </label>
+                </form>
+              </div>
+            </div>
 
             <div style={{ display: "flex", gap: "12px", marginBottom: "24px" }}>
               <DropdownStatus
@@ -150,18 +165,6 @@ const TicketModal = ({ workspaceId }) => {
                 defaultValue={newTicket.assignee}
                 selectedWorkspace={selectedWorkspace}
               />
-              {/* <Form.Select
-              name="label"
-              id="label"
-              onChange={handleSelect}
-              style={{ width: "6vw" }}
-              // value={newTicket.label}
-            >
-              <option>Label</option>
-              <option value="Bug">Bug</option>
-              <option value="Feature">Feature</option>
-              <option value="Improvement">Improvement</option>
-            </Form.Select> */}
             </div>
           </Modal.Body>
 
@@ -171,7 +174,8 @@ const TicketModal = ({ workspaceId }) => {
               className="create-ticket-button"
               onClick={() => {
                 addNewTicket();
-                navigate(`/dashboard/${workspaceId}`);
+                // navigate(`/dashboard/${workspaceId}`);
+                setShowModal(!showModal);
               }}
             >
               Create ticket

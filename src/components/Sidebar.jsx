@@ -54,9 +54,15 @@ const Sidebar = ({ workspaceId }) => {
 
             <SidebarButtons />
 
-            <SidebarAccordion allWorkspaces={allWorkspaces}/>
+            <SidebarAccordion allWorkspaces={allWorkspaces} />
           </nav>
-          {showModal && <TicketModal workspaceId={workspaceId} />}
+          {showModal && (
+            <TicketModal
+              workspaceId={workspaceId}
+              showModal={showModal}
+              setShowModal={setShowModal}
+            />
+          )}
         </div>
       )}
     </>

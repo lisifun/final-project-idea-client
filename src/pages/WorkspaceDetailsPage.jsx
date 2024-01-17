@@ -1,10 +1,11 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
 import { SERVER_URL } from "../services/SERVER_URL";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import WorkspaceModal from "../components/WorkspaceModal";
 
 const WorkspaceDetailsPage = () => {
   const { workspaceId } = useParams();
@@ -14,8 +15,9 @@ const WorkspaceDetailsPage = () => {
     memberEmail: "",
   });
   const [allWorkspaces, setAllWorkspaces] = useState([]);
+  const [isClick, setIsClick] = useState(false);
 
-  console.log(workspaceId);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -82,18 +84,20 @@ const WorkspaceDetailsPage = () => {
   useEffect(() => {
     handleUpdate();
   }, [editedWorkspace]);
+
+  console.log(editedWorkspace);
+  console.log(newMember);
   return (
     <>
       {editedWorkspace && (
         <div className="workspace-details-page">
-          <div className="workspace-header">
-            <h2 className="workspace-heading">Workspace</h2>
-            <div className="workspace-orientation">
-              Manage your workspace settings
-            </div>
+          <h2 className="workspace-heading">Workspace</h2>
+          <div className="workspace-orientation">
+            Manage your workspace settings
           </div>
 
           <div className="horizontal-line"></div>
+
           <div
             style={{
               display: "flex",
@@ -141,7 +145,6 @@ const WorkspaceDetailsPage = () => {
           </div>
 
           <div className="horizontal-line"></div>
-
           <div
             style={{
               display: "flex",
@@ -151,17 +154,18 @@ const WorkspaceDetailsPage = () => {
             }}
           >
             <h4>Members</h4>
+
             <div>Workspace members</div>
             <div
               style={{
                 display: "flex",
-                flexDirection: "column",
-                gap: "12px",
+                alignItems: "flex-end",
+                gap: "400px",
                 padding: "20px",
               }}
             >
               {editedWorkspace.members.length > 0 && (
-                <>
+                <div>
                   {editedWorkspace.members.map((member, index) => {
                     return (
                       <div
@@ -178,49 +182,31 @@ const WorkspaceDetailsPage = () => {
                       </div>
                     );
                   })}
-                </>
+                </div>
               )}
+              <Button
+                variant="primary"
+                className="update-button"
+                onClick={() => {
+                  setIsClick(!isClick);
+                }}
+              >
+                Add member
+              </Button>
             </div>
-
-            <Button
-              variant="primary"
-              className="update-button"
-              onClick={() => {
-                handleAdd();
-              }}
-            >
-              Add member
-            </Button>
-
-            <div>Add new members to the workspace</div>
-
-            <Form.Group className="mb-3" style={{ width: "50vw" }}>
-              <Form.Label>
-                <b>Member's name</b>
-              </Form.Label>
-              <Form.Control
-                type="text"
-                name="memberName"
-                value={newMember.memberName}
-                onChange={handleNewMemberInput}
-                required
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" style={{ width: "50vw" }}>
-              <Form.Label>
-                <b>Member's email</b>
-              </Form.Label>
-              <Form.Control
-                type="email"
-                name="memberEmail"
-                value={newMember.memberEmail}
-                onChange={handleNewMemberInput}
-                required
-              />
-            </Form.Group>
           </div>
         </div>
+      )}
+
+      {isClick && (
+        <WorkspaceModal
+          editedWorkspace={editedWorkspace}
+          newMember={newMember}
+          handleNewMemberInput={handleNewMemberInput}
+          handleAdd={handleAdd}
+          isClick={isClick}
+          setIsClick={setIsClick}
+        />
       )}
     </>
   );
