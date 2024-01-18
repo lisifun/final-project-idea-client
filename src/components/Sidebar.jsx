@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import { useContext } from "react";
-
-import { AuthContext } from "../context/auth.context";
 import TicketModal from "./TicketModal";
 
 import DropdownWorkspace from "./DropdownWorkspace";
@@ -11,6 +8,9 @@ import NewTicketButton from "./NewTicketButton";
 import SidebarAccordion from "./SidebarAccordion";
 
 const Sidebar = ({
+  addNewTicket,
+  logOutUser,
+  user,
   setFilteredTickets,
   allWorkspaces,
   setAllTickets,
@@ -19,8 +19,6 @@ const Sidebar = ({
   showModal,
   setShowModal,
 }) => {
-  const { user, logOutUser } = useContext(AuthContext);
-
   return (
     <>
       {allWorkspaces && (
@@ -54,6 +52,8 @@ const Sidebar = ({
               currentWorkspace={currentWorkspace}
               showModal={showModal}
               setShowModal={setShowModal}
+              user={user}
+              addNewTicket={addNewTicket}
             />
           )}
         </div>

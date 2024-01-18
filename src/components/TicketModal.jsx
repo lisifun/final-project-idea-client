@@ -10,12 +10,14 @@ import DropdownLabel from "./DropdownLabel";
 import DropdownMember from "./DropdownMember";
 
 const TicketModal = ({
+  user,
   setFilteredTickets,
   currentWorkspace,
   allTickets,
   setAllTickets,
   showModal,
   setShowModal,
+  addNewTicket,
 }) => {
   const workspaceId = currentWorkspace._id;
 
@@ -27,7 +29,22 @@ const TicketModal = ({
     label: "",
     workspace: workspaceId,
     assignee: "",
+    createdBy: {
+      username: user.username,
+      photo: user.photo,
+      fullname: user.photo,
+      email: user.email,
+    },
   });
+
+  useEffect(() => {
+    if (user) {
+      setNewTicket((prev) => ({
+        ...prev,
+        createdBy: user._id,
+      }));
+    }
+  }, [user]);
 
   const handleTextInput = (e) => {
     setNewTicket((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -49,22 +66,11 @@ const TicketModal = ({
     setNewTicket((prev) => ({ ...prev, assignee: eventKey }));
   };
 
-  const addNewTicket = () => {
-    axios
-      .post(`${SERVER_URL}/tickets/${workspaceId}`, newTicket)
-      .then((response) => {
-        setAllTickets([newTicket, ...allTickets]);
-        setFilteredTickets([newTicket, ...allTickets]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
+  console.log("line 71 => ", newTicket);
   return (
     <>
       {currentWorkspace && (
-        <Modal.Dialog className="modal-ticket">
+        <Modal.Dialog className="modal-ticket" style={{ zIndex: "999" }}>
           <Modal.Header
             closeButton
             onClick={() => {
@@ -156,8 +162,8 @@ const TicketModal = ({
               variant="primary"
               className="create-ticket-button"
               onClick={() => {
-                addNewTicket();
-                // navigate(`/dashboard/${workspaceId}`);
+                console.log(newTicket);
+                addNewTicket(newTicket);
                 setShowModal(!showModal);
               }}
             >

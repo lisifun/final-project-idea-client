@@ -11,6 +11,8 @@ const TicketDetailsPage = () => {
   const { workspaceId } = useParams();
   const { ticketId } = useParams();
 
+  console.log("line 14 => TicketDetailsPage", ticketId);
+
   const [allWorkspaces, setAllWorkspaces] = useState([]);
   const [currentWorkspace, setCurrentWorkspace] = useState([]);
   const [allTickets, setAllTickets] = useState([]);
@@ -41,7 +43,7 @@ const TicketDetailsPage = () => {
 
   useEffect(() => {
     axios
-      .get(`${SERVER_URL}/tickets/${workspaceId}/${ticketId}`)
+      .get(`${SERVER_URL}/tickets/${workspaceId}`)
       .then((response) => {
         setAllTickets(response.data);
       })
@@ -94,7 +96,7 @@ const TicketDetailsPage = () => {
 
   return (
     <div className="ticket-details-page">
-      {selectedTicket && (
+      {selectedTicket._id && (
         <div className="details-page" style={{ display: "flex" }}>
           <Sidebar
             allWorkspaces={allWorkspaces}

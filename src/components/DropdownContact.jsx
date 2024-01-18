@@ -39,7 +39,7 @@ const DropdownContact = () => {
               <i
                 className="fab fa-linkedin"
                 style={{ marginRight: "16px" }}
-              ></i>{" "}
+              ></i>
               Lisandra Fundora
             </a>
           </div>

@@ -1,28 +1,19 @@
 body {
   height: 100vh;
-  /* background: linear-gradient(to bottom right, #14122b, #3f3955); */
-  /* background: linear-gradient(to bottom right, #000212, #13152f); */
   background-color: #191a23;
   color: rgb(238, 239, 252);
-  /* font-family: Inter; */
   font-family: "Inter", sans-serif;
 }
-
-/* hr {
-  color: gray;
-  width: 50vw;
-} */
 
 .link {
   text-decoration: none;
   color: rgb(238, 239, 252);
 }
 
-/* Navbar */
+/* NAVBAR COMPONENT */
 .navbar {
   border-bottom: 0.5px solid #3b3c48;
-  padding: 4px 200px;
-  background-color: #191a23;
+  padding: 2px 200px;
 }
 
 .web-logo {
@@ -30,6 +21,8 @@ body {
   align-items: center;
   gap: 4px;
 }
+
+/* DROPDOWNS COMPONENT */
 
 #features,
 #contact,
@@ -54,7 +47,7 @@ body {
 .feature-comments {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
 }
 
 .feature-tickets > div,
@@ -79,7 +72,6 @@ body {
 .dropdown-user,
 .dropdown-workspace {
   padding: 24px;
-  /* width: 16vw; */
   background: linear-gradient(to bottom right, #171830, #393b4f);
   color: rgb(238, 239, 252);
   border-radius: 16px;
@@ -96,181 +88,13 @@ body {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: 8px;
 }
 
-.loggin-button-home {
-  background-color: transparent !important;
-  border: transparent;
-}
-
-.singup-button,
-.login-button,
-.profile-button,
-.logout-button,
-.getstarted-button,
-.update-button,
-.add-member-button,
-.edit-button,
-.delete-button,
-.comment-button,
-.workspace-button,
-.assigness-button,
-.status-button,
-.labels-button,
-.priority-button,
-.create-ticket-button,
-.create-new-ticket-button {
-  background-color: #5c6ad2;
-  border: #5c6ad2;
-  cursor: pointer;
-}
-.singup-button:hover,
-.login-button:hover,
-.profile-button:hover,
-.logout-button:hover,
-.getstarted-button:hover,
-.update-button:hover,
-.add-member-button:hover,
-.edit-button:hover,
-.delete-button:hover,
-.comment-button:hover,
-.workspace-button:hover,
-.assigness-button:hover,
-.status-button:hover,
-.labels-button:hover,
-.priority-button:hover,
-.create-ticket-button:hover,
-.create-new-ticket-button:hover {
-  background-color: #6b7bf1;
-}
-
-.inbox-button,
-.mytickets-button,
-.roadmaps-button,
-.views-button,
-.import-tickets-button,
-.invite-people-button,
-.cycles-button,
-.tickets-button,
-.active-button,
-.backlog-button,
-.projects-button,
-.view-button,
-.bug-button,
-.feature-button,
-.improvement-button,
-.no-priority-button,
-.urgent-button,
-.high-button,
-.medium-button,
-.low-button {
-  background-color: transparent;
-  border: transparent;
-  /* width: 10vw; */
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.inbox-button,
-.mytickets-button,
-.roadmaps-button,
-.views-button {
-  width: 250px;
-}
-
-.tickets-button,
-.active-button,
-.backlog-button,
-.projects-button,
-.view-button {
-  width: 200px;
-}
-
-.import-tickets-button,
-.invite-people-button,
-.cycles-button {
-  width: 220px;
-}
-
-.inbox-button:hover,
-.mytickets-button:hover,
-.roadmaps-button:hover,
-.views-button:hover,
-.import-tickets-button:hover,
-.invite-people-button:hover,
-.cycles-button:hover,
-.tickets-button:hover,
-.active-button:hover,
-.backlog-button:hover,
-.projects-button:hover,
-.bug-button:hover,
-.feature-button:hover,
-.improvement-button:hover,
-.no-priority-button:hover,
-.urgent-button:hover,
-.high-button:hover,
-.medium-button:hover,
-.low-button:hover,
-.view-button:hover {
-  background-color: #262736;
-  border: 0.5px solid #262736;
-}
-
-.bug-button.active,
-.feature-button.active,
-.improvement-button.active,
-.no-priority-button.active,
-.urgent-button.active,
-.high-button.active,
-.medium-button.active,
-.low-button.active {
-  background-color: #262736;
-  border: 0.5px solid #262736;
-}
-
-/* .btn.active {
-  background-color: #262736;
-  border: 0.5px solid #262736;
-} */
-
-.new-ticket-button {
-  width: 200px;
-  display: flex;
-  justify-content: flex-start;
-}
-.new-ticket-button,
-.search-button,
-.status-filter,
-.label-filter,
-.priority-filter {
-  cursor: pointer;
-  background-color: #262733;
-  border: 0.5px solid #3b3c48;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  height: 4vh;
-}
-
-.search-button:hover,
-.new-ticket-button:hover,
-.status-filter:hover,
-.label-filter:hover,
-.priority-filter:hover,
-#workspace:hover,
-#user:hover {
-  background-color: #262736;
-  border: 0.5px solid #262736;
-}
-
-/* Home Page */
+/* HOME PAGE */
 .home-info {
   display: flex;
   flex-direction: column;
   align-items: center;
-
   gap: 40px;
   padding: 128px;
 }
@@ -295,7 +119,7 @@ body {
   font-weight: 400;
 }
 
-/* Singup Page && Login Page*/
+/* SIGN UP , LOG IN && WORKSPACE PAGES */
 .login-page,
 .singup-page,
 .workspace-page {
@@ -320,6 +144,49 @@ body {
   margin-bottom: 40px;
   background: linear-gradient(to bottom right, #171830, #393b4f);
 }
+
+.input-group {
+  position: relative;
+  --primary: #5c6ad2;
+}
+
+.input {
+  all: unset;
+  color: rgb(238, 239, 252);
+  padding: 12px;
+  width: 20vw;
+  border: 1px solid #3b3c48;
+  border-radius: 10px;
+  transition: 150ms cubic-bezier(0.4, 0, 0.4, 1);
+}
+
+.label {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: rgb(156, 158, 172);
+  pointer-events: none;
+  transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input:focus {
+  border: 1px solid var(--primary);
+}
+
+.input:is(:focus, :valid) ~ label {
+  transform: translateY(-100%) scale(0.7);
+  background: linear-gradient(to bottom right, #171830, #393b4f);
+  padding-inline: 0.9rem;
+  color: var(--primary);
+}
+
+/* DASHBOARD PAGE */
+.dashboard-page {
+  height: 100vh;
+  display: flex;
+}
+
+/* SIDEBAR COMPONENT */
 
 /* Profile Page */
 .profile-page {
@@ -353,12 +220,6 @@ body {
   border-radius: 50%;
 }
 
-/* Dashboard */
-.dashboard-page {
-  background-color: #191a23;
-  height: 100vh;
-}
-
 /* Sidebar */
 .sidebar {
   display: flex;
@@ -375,16 +236,16 @@ body {
   gap: 12px;
 }
 
-#workspace {
-  display: flex;
-  gap: 4px;
-  align-items: center;
-}
-
 .workspace-user {
   color: #81869b;
   display: flex;
   justify-content: space-between;
+}
+
+#workspace {
+  display: flex;
+  gap: 4px;
+  align-items: center;
 }
 
 .workspace-logo {
@@ -625,7 +486,7 @@ body {
   background-color: rgb(32, 33, 46);
 }
 
-#comment {
+#comments {
   width: 45vw;
   background-color: rgb(32, 33, 46);
   border: rgb(32, 33, 46);
@@ -822,38 +683,170 @@ body {
 }
 
 /* Beta */
-.input-group {
-  position: relative;
-  --primary: #5c6ad2;
+
+/* BUTTONS */
+.loggin-button-home {
+  background-color: transparent !important;
+  border: transparent;
 }
 
-.input {
-  all: unset;
-  /* box-sizing: border-box; */
-  color: rgb(238, 239, 252);
-  padding: 12px;
-  width: 20vw;
-  border: 1px solid #3b3c48;
-  border-radius: 10px;
-  transition: 150ms cubic-bezier(0.4, 0, 0.4, 1);
+.singup-button,
+.login-button,
+.profile-button,
+.logout-button,
+.get-started-button,
+.update-button,
+.add-member-button,
+.edit-button,
+.delete-button,
+.comment-button,
+.workspace-button,
+.assigness-button,
+.status-button,
+.labels-button,
+.priority-button,
+.create-ticket-button,
+.create-new-ticket-button {
+  background-color: #5c6ad2;
+  border: #5c6ad2;
+  cursor: pointer;
+}
+.singup-button:hover,
+.login-button:hover,
+.profile-button:hover,
+.logout-button:hover,
+.get-started-button:hover,
+.update-button:hover,
+.add-member-button:hover,
+.edit-button:hover,
+.delete-button:hover,
+.comment-button:hover,
+.workspace-button:hover,
+.assigness-button:hover,
+.status-button:hover,
+.labels-button:hover,
+.priority-button:hover,
+.create-ticket-button:hover,
+.create-new-ticket-button:hover {
+  background-color: #6b7bf1;
 }
 
-.label {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  color: rgb(156, 158, 172);
-  pointer-events: none;
-  transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+.inbox-button,
+.mytickets-button,
+.roadmaps-button,
+.views-button,
+.import-tickets-button,
+.invite-people-button,
+.cycles-button,
+.tickets-button,
+.active-button,
+.backlog-button,
+.projects-button,
+.view-button,
+.bug-button,
+.feature-button,
+.improvement-button,
+.no-priority-button,
+.urgent-button,
+.high-button,
+.medium-button,
+.low-button {
+  background-color: transparent;
+  border: transparent;
+  /* width: 10vw; */
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 
-.input:focus {
-  border: 1px solid var(--primary);
+.inbox-button,
+.mytickets-button,
+.roadmaps-button,
+.views-button {
+  width: 250px;
 }
 
-.input:is(:focus, :valid) ~ label {
-  transform: translateY(-100%) scale(0.7);
-  background: linear-gradient(to bottom right, #171830, #393b4f);
-  padding-inline: 0.9rem;
-  color: var(--primary);
+.tickets-button,
+.active-button,
+.backlog-button,
+.projects-button,
+.view-button {
+  width: 200px;
+}
+
+.import-tickets-button,
+.invite-people-button,
+.cycles-button {
+  width: 220px;
+}
+
+.inbox-button:hover,
+.mytickets-button:hover,
+.roadmaps-button:hover,
+.views-button:hover,
+.import-tickets-button:hover,
+.invite-people-button:hover,
+.cycles-button:hover,
+.tickets-button:hover,
+.active-button:hover,
+.backlog-button:hover,
+.projects-button:hover,
+.bug-button:hover,
+.feature-button:hover,
+.improvement-button:hover,
+.no-priority-button:hover,
+.urgent-button:hover,
+.high-button:hover,
+.medium-button:hover,
+.low-button:hover,
+.view-button:hover {
+  background-color: #262736;
+  border: 0.5px solid #262736;
+}
+
+.bug-button.active,
+.feature-button.active,
+.improvement-button.active,
+.no-priority-button.active,
+.urgent-button.active,
+.high-button.active,
+.medium-button.active,
+.low-button.active {
+  background-color: #262736;
+  border: 0.5px solid #262736;
+}
+
+/* .btn.active {
+  background-color: #262736;
+  border: 0.5px solid #262736;
+} */
+
+.new-ticket-button {
+  width: 200px;
+  display: flex;
+  justify-content: flex-start;
+}
+.new-ticket-button,
+.search-button,
+.status-filter,
+.label-filter,
+.priority-filter {
+  cursor: pointer;
+  background-color: #262733;
+  border: 0.5px solid #3b3c48;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 4vh;
+}
+
+.search-button:hover,
+.new-ticket-button:hover,
+.status-filter:hover,
+.label-filter:hover,
+.priority-filter:hover,
+#workspace:hover,
+#user:hover {
+  background-color: #262736;
+  border: 0.5px solid #262736;
 }

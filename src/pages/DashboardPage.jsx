@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../context/auth.context";
 
 import Sidebar from "../components/Sidebar";
 import TicketList from "../components/TicketList";
@@ -10,11 +11,14 @@ import { useParams } from "react-router-dom";
 const DashboardPage = () => {
   const { workspaceId } = useParams();
 
+  const { user, logOutUser } = useContext(AuthContext);
+
   const [showModal, setShowModal] = useState(false);
   const [currentWorkspace, setCurrentWorkspace] = useState([]);
   const [allWorkspaces, setAllWorkspaces] = useState([]);
   const [allTickets, setAllTickets] = useState([]);
   const [filteredTickets, setFilteredTickets] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -25,9 +29,7 @@ const DashboardPage = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
 
-  useEffect(() => {
     axios
       .get(`${SERVER_URL}/workspaces/${workspaceId}`)
       .then((response) => {
@@ -36,24 +38,37 @@ const DashboardPage = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
 
-  useEffect(() => {
     axios
       .get(`${SERVER_URL}/tickets/${workspaceId}`)
       .then((response) => {
         setAllTickets(response.data);
         setFilteredTickets(response.data);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
+  const addNewTicket = (newTicket) => {
+    axios
+      .post(`${SERVER_URL}/tickets/${workspaceId}`, newTicket)
+      .then((response) => {
+        console.log("line 58 => ", response.data);
+        console.log("59 => ", response.data.tickets[0]);
+        setAllTickets(response.data.tickets);
+        setFilteredTickets(response.data.tickets);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className="dashboard-page">
-      {allWorkspaces.length > 0 && (
-        <div style={{ display: "flex" }}>
+      {!isLoading && (
+        <>
           <Sidebar
             setFilteredTickets={setFilteredTickets}
             allTickets={allTickets}
@@ -62,6 +77,9 @@ const DashboardPage = () => {
             currentWorkspace={currentWorkspace}
             showModal={showModal}
             setShowModal={setShowModal}
+            user={user}
+            logOutUser={logOutUser}
+            addNewTicket={addNewTicket}
           />
 
           <TicketList
@@ -69,6 +87,7 @@ const DashboardPage = () => {
             filteredTickets={filteredTickets}
             currentWorkspace={currentWorkspace}
             setShowModal={setShowModal}
+            user={user}
           />
 
           <DashboardFilter
@@ -77,7 +96,7 @@ const DashboardPage = () => {
             setFilteredTickets={setFilteredTickets}
             currentWorkspace={currentWorkspace}
           />
-        </div>
+        </>
       )}
     </div>
   );

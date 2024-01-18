@@ -119,31 +119,3 @@ const Signup = () => {
 };
 
 export default Signup;
-
-{
-  /* <Form>
-<Form.Group className="mb-3">
-  <div>Member's name</div>
-  <Form.Control
-    type="text"
-    name="memberName"
-    value={newMember.memberName}
-    onChange={handleNewMemberInput}
-    required
-    placeholder="Member's name"
-  />
-</Form.Group>
-
-<Form.Group className="mb-3" style={{ width: "50vw" }}>
-  <div>Member's email</div>
-  <Form.Control
-    type="email"
-    name="memberEmail"
-    value={newMember.memberEmail}
-    onChange={handleNewMemberInput}
-    required
-    placeholder="Member's email"
-  />
-</Form.Group>
-</Form> */
-}

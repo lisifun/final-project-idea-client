@@ -4,6 +4,7 @@ import TicketCard from "./TicketCard";
 import WelcomeModal from "./WelcomeModal";
 
 const TicketList = ({ filteredTickets, currentWorkspace, setShowModal }) => {
+  console.log("line 8 on TicketList => filteredTickets", filteredTickets);
   const doneTickets = filteredTickets.filter((ticket) => {
     return ticket.status === "done";
   });
@@ -225,14 +226,14 @@ const TicketList = ({ filteredTickets, currentWorkspace, setShowModal }) => {
         </>
       )}
 
-      {/* {doneTickets.length === 0 &&
+      {doneTickets.length === 0 &&
         inReviewTickets.length === 0 &&
         inProgressTickets.length === 0 &&
         todoTickets.length === 0 && (
           <>
             <WelcomeModal setShowModal={setShowModal} />
           </>
-        )} */}
+        )}
     </div>
   );
 };

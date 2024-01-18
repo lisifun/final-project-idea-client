@@ -10,6 +10,7 @@ const WorkspaceModal = ({
   handleAdd,
   isClick,
   setIsClick,
+  handleUpdate,
 }) => {
   return (
     <div>
@@ -81,8 +82,7 @@ const WorkspaceModal = ({
             variant="primary"
             className="create-ticket-button"
             onClick={() => {
-              handleAdd();
-              setIsClick(!isClick);
+              handleUpdate();
             }}
             style={{ marginRight: "28px" }}
           >

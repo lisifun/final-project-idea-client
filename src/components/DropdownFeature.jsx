@@ -5,7 +5,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 const DropdownFeature = () => {
   return (
     <div>
-      <Dropdown className="dropdown-features">
+      <Dropdown>
         <Dropdown.Toggle id="features">Features</Dropdown.Toggle>
 
         <Dropdown.Menu className="dropdown-menu-features">

@@ -9,7 +9,7 @@ import WorkspaceModal from "../components/WorkspaceModal";
 
 const WorkspaceDetailsPage = () => {
   const { workspaceId } = useParams();
-  const [editedWorkspace, setEditedWorkspace] = useState();
+  const [editedWorkspace, setEditedWorkspace] = useState([]);
   const [newMember, setNewMember] = useState({
     memberName: "",
     memberEmail: "",
@@ -37,10 +37,6 @@ const WorkspaceDetailsPage = () => {
       .catch((err) => {
         console.log(err);
       });
-    // setEditedWorkspace((prev) => ({
-    //   ...prev,
-    //   members: [...members],
-    // }));
   }, []);
 
   const handleTextInput = (e) => {
@@ -62,9 +58,6 @@ const WorkspaceDetailsPage = () => {
       .put(`${SERVER_URL}/workspaces/${workspaceId}`, editedWorkspace)
       .then((response) => {
         const udpdatedWorkspaces = allWorkspaces.map((workspace) => {
-          console.log("inside the map");
-          console.log("workspace => ", workspace);
-          console.log("response data => ", response.data);
           return workspace._id === editedWorkspace._id
             ? response.data
             : workspace;
@@ -75,15 +68,19 @@ const WorkspaceDetailsPage = () => {
   };
 
   const handleAdd = () => {
-    handleUpdate();
-    setEditedWorkspace((prev) => ({
-      ...prev,
-      members: [...prev.members, newMember],
-    }));
+    setEditedWorkspace(
+      (prev) => ({
+        ...prev,
+        members: [...prev.members, newMember],
+      }),
+      () => {
+        handleUpdate();
+        setIsClick(false); // Close the modal after updating
+      }
+    );
+
     setNewMember({ memberName: "", memberEmail: "" });
   };
-
-  console.log("edited workspace => ", editedWorkspace);
 
   return (
     <>
@@ -183,7 +180,7 @@ const WorkspaceDetailsPage = () => {
                 </Button>
               </div>
             </div>
-            {editedWorkspace.members.length > 0 && (
+            {editedWorkspace.members && (
               <div
                 style={{
                   display: "flex",

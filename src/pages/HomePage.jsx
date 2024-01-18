@@ -16,7 +16,7 @@ const Home = () => {
       </div>
 
       <Link to="/login" className="link">
-        <Button className="getstarted-button">
+        <Button className="get-started-button">
           Get started <i className="fas fa-chevron-right"></i>
         </Button>
       </Link>
