@@ -3,19 +3,20 @@ import { Link, useParams } from "react-router-dom";
 
 import Dropdown from "react-bootstrap/Dropdown";
 
-const DropdownWorkspace = ({ allWorkspaces, user }) => {
-  const { workspaceId } = useParams();
-
-  console.log("line 9 => ", workspaceId);
+const DropdownWorkspace = ({ currentWorkspace, user, allWorkspaces }) => {
   return (
     <div>
-      {workspaceId && (
+      {currentWorkspace && (
         <Dropdown>
           <Dropdown.Toggle id="workspace">
-            <div className="workspace-logo">
-              {allWorkspaces[0].name.slice(0, 2).toUpperCase()}
-            </div>
-            <div>{allWorkspaces[0].name}</div>
+            {currentWorkspace.name && (
+              <>
+                <div className="workspace-logo">
+                  {currentWorkspace.name.slice(0, 2).toUpperCase()}
+                </div>
+                <div>{currentWorkspace.name}</div>
+              </>
+            )}
           </Dropdown.Toggle>
 
           <Dropdown.Menu className="dropdown-workspace">
@@ -24,7 +25,11 @@ const DropdownWorkspace = ({ allWorkspaces, user }) => {
             {allWorkspaces &&
               allWorkspaces.map((workspace, index) => {
                 return (
-                  <Link className="link" key={index}>
+                  <Link
+                    className="link"
+                    key={index}
+                    to={`/dashboard/${workspace._id}`}
+                  >
                     <div>{workspace.name}</div>
                   </Link>
                 );
@@ -36,7 +41,7 @@ const DropdownWorkspace = ({ allWorkspaces, user }) => {
 
             <Dropdown.Item
               as={Link}
-              to={`/dashboard/${workspaceId}/details`}
+              to={`/dashboard/${currentWorkspace._id}/details`}
               style={{ color: "rgb(238, 239, 252)" }}
             >
               Workspace settings

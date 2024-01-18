@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { SERVER_URL } from "../services/SERVER_URL";
 
@@ -10,9 +9,16 @@ import DropdownPriority from "./DropdownPriority";
 import DropdownLabel from "./DropdownLabel";
 import DropdownMember from "./DropdownMember";
 
-const TicketModal = ({ workspaceId, showModal, setShowModal }) => {
-  const [selectedWorkspace, setSelectedWorkspace] = useState(null);
-  const [allTickets, setAllTickets] = useState(null);
+const TicketModal = ({
+  setFilteredTickets,
+  currentWorkspace,
+  allTickets,
+  setAllTickets,
+  showModal,
+  setShowModal,
+}) => {
+  const workspaceId = currentWorkspace._id;
+
   const [newTicket, setNewTicket] = useState({
     title: "",
     description: "",
@@ -22,8 +28,6 @@ const TicketModal = ({ workspaceId, showModal, setShowModal }) => {
     workspace: workspaceId,
     assignee: "",
   });
-
-  // const navigate = useNavigate();
 
   const handleTextInput = (e) => {
     setNewTicket((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -45,33 +49,12 @@ const TicketModal = ({ workspaceId, showModal, setShowModal }) => {
     setNewTicket((prev) => ({ ...prev, assignee: eventKey }));
   };
 
-  useEffect(() => {
-    axios
-      .get(`${SERVER_URL}/tickets/${workspaceId}`)
-      .then((response) => {
-        setAllTickets(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get(`${SERVER_URL}/workspaces/${workspaceId}`)
-      .then((response) => {
-        setSelectedWorkspace(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
   const addNewTicket = () => {
     axios
       .post(`${SERVER_URL}/tickets/${workspaceId}`, newTicket)
       .then((response) => {
         setAllTickets([newTicket, ...allTickets]);
+        setFilteredTickets([newTicket, ...allTickets]);
       })
       .catch((err) => {
         console.log(err);
@@ -80,7 +63,7 @@ const TicketModal = ({ workspaceId, showModal, setShowModal }) => {
 
   return (
     <>
-      {selectedWorkspace && (
+      {currentWorkspace && (
         <Modal.Dialog className="modal-ticket">
           <Modal.Header
             closeButton
@@ -92,7 +75,7 @@ const TicketModal = ({ workspaceId, showModal, setShowModal }) => {
           >
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <div className="workspace-logo">
-                {selectedWorkspace.name.slice(0, 2).toUpperCase()}
+                {currentWorkspace.name.slice(0, 2).toUpperCase()}
               </div>
 
               <div>New ticket</div>
@@ -120,7 +103,7 @@ const TicketModal = ({ workspaceId, showModal, setShowModal }) => {
                     required
                     style={{ width: "30vw " }}
                   ></input>
-                  <label className="label" for="title">
+                  <label className="label" htmlFor="title">
                     Ticket title
                   </label>
                 </form>
@@ -137,7 +120,7 @@ const TicketModal = ({ workspaceId, showModal, setShowModal }) => {
                     required
                     style={{ width: "30vw " }}
                   ></input>
-                  <label className="label" for="description">
+                  <label className="label" htmlFor="description">
                     Ticket description
                   </label>
                 </form>
@@ -163,7 +146,7 @@ const TicketModal = ({ workspaceId, showModal, setShowModal }) => {
               <DropdownMember
                 handleMemberSelect={handleMemberSelect}
                 defaultValue={newTicket.assignee}
-                selectedWorkspace={selectedWorkspace}
+                currentWorkspace={currentWorkspace}
               />
             </div>
           </Modal.Body>

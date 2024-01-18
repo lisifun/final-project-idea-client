@@ -8,34 +8,45 @@ import TicketDetails from "../components/TicketDetails";
 import MoreTicketDetails from "../components/MoreTicketDetails";
 
 const TicketDetailsPage = () => {
-  const workspaceId = useParams().workspaceId;
-  const ticketId = useParams().ticketId;
+  const { workspaceId } = useParams();
+  const { ticketId } = useParams();
 
+  const [allWorkspaces, setAllWorkspaces] = useState([]);
+  const [currentWorkspace, setCurrentWorkspace] = useState([]);
   const [allTickets, setAllTickets] = useState([]);
-  const [selectedTicket, setSelectedTicket] = useState(null);
-  const [editedTicket, setEditedTicket] = useState(null);
-  const [selectedWorkspace, setSelectedWorkspace] = useState(null);
+  const [selectedTicket, setSelectedTicket] = useState([]);
+  const [editedTicket, setEditedTicket] = useState([]);
 
-  
-
-
+  useEffect(() => {
+    axios
+      .get(`${SERVER_URL}/workspaces`)
+      .then((response) => {
+        setAllWorkspaces(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   useEffect(() => {
     axios
       .get(`${SERVER_URL}/workspaces/${workspaceId}`)
       .then((response) => {
-        setSelectedWorkspace(response.data);
+        setCurrentWorkspace(response.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, []);
 
   useEffect(() => {
     axios
       .get(`${SERVER_URL}/tickets/${workspaceId}/${ticketId}`)
       .then((response) => {
         setAllTickets(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }, []);
 
@@ -50,21 +61,6 @@ const TicketDetailsPage = () => {
         console.log(err);
       });
   }, []);
-
-  const deleteTicket = (ticketId) => {
-    axios
-      .delete(`${SERVER_URL}/tickets/${workspaceId}/${ticketId}`)
-      .then((response) => {
-        setAllTickets(
-          allTickets.filter((ticket) => {
-            return ticket._id !== ticketId;
-          })
-        );
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   const updateTicket = (editedTicket) => {
     axios
@@ -81,11 +77,31 @@ const TicketDetailsPage = () => {
       });
   };
 
+  const deleteTicket = (ticketId) => {
+    axios
+      .delete(`${SERVER_URL}/tickets/${workspaceId}/${ticketId}`)
+      .then((response) => {
+        setAllTickets(
+          allTickets.filter((ticket) => {
+            return ticket._id !== ticketId;
+          })
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className="ticket-details-page">
       {selectedTicket && (
         <div className="details-page" style={{ display: "flex" }}>
-          <Sidebar />
+          <Sidebar
+            allWorkspaces={allWorkspaces}
+            setAllTickets={setAllTickets}
+            currentWorkspace={currentWorkspace}
+            allTickets={allTickets}
+          />
           <TicketDetails
             selectedTicket={selectedTicket}
             editedTicket={editedTicket}
@@ -98,7 +114,7 @@ const TicketDetailsPage = () => {
             editedTicket={editedTicket}
             setEditedTicket={setEditedTicket}
             onChange={updateTicket}
-            selectedWorkspace={selectedWorkspace}
+            currentWorkspace={currentWorkspace}
           />
         </div>
       )}

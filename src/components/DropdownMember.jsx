@@ -5,7 +5,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 const DropdownMember = ({
   handleMemberSelect,
   defaultValue,
-  selectedWorkspace,
+  currentWorkspace,
 }) => {
   return (
     <div>
@@ -35,9 +35,9 @@ const DropdownMember = ({
         </Dropdown.Toggle>
 
         <Dropdown.Menu className="menu-assignee">
-          {selectedWorkspace.members && (
+          {currentWorkspace.members && (
             <>
-              {selectedWorkspace.members.map((member, index) => {
+              {currentWorkspace.members.map((member, index) => {
                 return (
                   <>
                     <Dropdown.Item

@@ -5,14 +5,14 @@ import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import Button from "react-bootstrap/Button";
 
 const DashboardFilter = ({
-  allWorkspaces,
   allTickets,
-  filteredTickets,
   setFilteredTickets,
+  currentWorkspace,
 }) => {
   const [statusClicking, setStatusClicking] = useState(false);
   const [labelClicking, setLabelClicking] = useState(false);
   const [priorityClicking, setPriorityClicking] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
   return (
     <div className="dashboard-filter">
@@ -34,10 +34,14 @@ const DashboardFilter = ({
           Activate tickets
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <div className="workspace-logo">
-            {allWorkspaces[0].name.slice(0, 2).toUpperCase()}
-          </div>
-          <div>{allWorkspaces[0].name}</div>
+          {currentWorkspace.name && (
+            <>
+              <div className="workspace-logo">
+                {currentWorkspace.name.slice(0, 2).toUpperCase()}
+              </div>
+              <div>{currentWorkspace.name}</div>
+            </>
+          )}
         </div>
       </div>
       <div style={{ borderBottom: "0.5px solid #3b3c48" }}></div>
@@ -55,7 +59,7 @@ const DashboardFilter = ({
             id="tbg-radio-1"
             value={1}
             onClick={() => {
-              setStatusClicking(true);
+              // setStatusClicking(true);
               setLabelClicking(false);
               setPriorityClicking(false);
               setFilteredTickets(allTickets);
@@ -68,7 +72,6 @@ const DashboardFilter = ({
             id="tbg-radio-2"
             value={2}
             onClick={() => {
-              // setStatusClicking(false);
               setLabelClicking(true);
               setPriorityClicking(false);
             }}
@@ -80,7 +83,6 @@ const DashboardFilter = ({
             id="tbg-radio-3"
             value={3}
             onClick={() => {
-              // setStatusClicking(false);
               setLabelClicking(false);
               setPriorityClicking(true);
             }}
@@ -92,7 +94,6 @@ const DashboardFilter = ({
         {labelClicking && (
           <>
             <Button
-              style={{ display: "flex", gap: "8px", alignItems: "center" }}
               onClick={() => {
                 setFilteredTickets(
                   allTickets.filter((ticket) => {
@@ -110,7 +111,6 @@ const DashboardFilter = ({
             </Button>
 
             <Button
-              style={{ display: "flex", gap: "8px", alignItems: "center" }}
               onClick={() => {
                 setFilteredTickets(
                   allTickets.filter((ticket) => {
@@ -128,7 +128,6 @@ const DashboardFilter = ({
             </Button>
 
             <Button
-              style={{ display: "flex", gap: "8px", alignItems: "center" }}
               onClick={() => {
                 setFilteredTickets(
                   allTickets.filter((ticket) => {
@@ -150,7 +149,6 @@ const DashboardFilter = ({
         {priorityClicking && (
           <>
             <Button
-              style={{ display: "flex", gap: "8px", alignItems: "center" }}
               onClick={() => {
                 setFilteredTickets(
                   allTickets.filter((ticket) => {
@@ -198,7 +196,6 @@ const DashboardFilter = ({
             </Button>
 
             <Button
-              style={{ display: "flex", gap: "8px", alignItems: "center" }}
               onClick={() => {
                 setFilteredTickets(
                   allTickets.filter((ticket) => {
@@ -221,7 +218,6 @@ const DashboardFilter = ({
             </Button>
 
             <Button
-              style={{ display: "flex", gap: "8px", alignItems: "center" }}
               onClick={() => {
                 setFilteredTickets(
                   allTickets.filter((ticket) => {
@@ -248,7 +244,6 @@ const DashboardFilter = ({
             </Button>
 
             <Button
-              style={{ display: "flex", gap: "8px", alignItems: "center" }}
               onClick={() => {
                 setFilteredTickets(
                   allTickets.filter((ticket) => {
@@ -282,7 +277,6 @@ const DashboardFilter = ({
             </Button>
 
             <Button
-              style={{ display: "flex", gap: "8px", alignItems: "center" }}
               onClick={() => {
                 setFilteredTickets(
                   allTickets.filter((ticket) => {

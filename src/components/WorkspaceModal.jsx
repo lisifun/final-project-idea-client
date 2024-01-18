@@ -11,7 +11,6 @@ const WorkspaceModal = ({
   isClick,
   setIsClick,
 }) => {
-  console.log(newMember);
   return (
     <div>
       <Modal.Dialog className="modal-member">
@@ -50,9 +49,9 @@ const WorkspaceModal = ({
                   value={newMember.memberName}
                   onChange={handleNewMemberInput}
                   required
-                  style={{ width: "16vw " }}
+                  style={{ width: "400px " }}
                 ></input>
-                <label className="label" for="memberName">
+                <label className="label" htmlFor="memberName">
                   Member's name
                 </label>
               </form>
@@ -67,9 +66,9 @@ const WorkspaceModal = ({
                   value={newMember.memberEmail}
                   onChange={handleNewMemberInput}
                   required
-                  style={{ width: "16vw " }}
+                  style={{ width: "400px " }}
                 ></input>
-                <label className="label" for="memberEmail">
+                <label className="label" htmlFor="memberEmail">
                   Member's email
                 </label>
               </form>
@@ -85,6 +84,7 @@ const WorkspaceModal = ({
               handleAdd();
               setIsClick(!isClick);
             }}
+            style={{ marginRight: "28px" }}
           >
             Add member
           </Button>
@@ -95,24 +95,3 @@ const WorkspaceModal = ({
 };
 
 export default WorkspaceModal;
-
-{/* <Form style={{ marginBottom: "24px" }}>
-  <Form.Group className="mb-3">
-    <Form.Control
-      type="text"
-      name="title"
-      value={newTicket.title}
-      onChange={handleTextInput}
-      placeholder="Ticket title"
-    />
-  </Form.Group>
-  <Form.Group className="mb-3">
-    <Form.Control
-      type="text"
-      name="description"
-      value={newTicket.description}
-      onChange={handleTextInput}
-      placeholder="Ticket description..."
-    />
-  </Form.Group>
-</Form>; */}

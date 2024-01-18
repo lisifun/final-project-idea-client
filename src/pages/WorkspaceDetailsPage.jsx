@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { SERVER_URL } from "../services/SERVER_URL";
 
@@ -16,8 +16,6 @@ const WorkspaceDetailsPage = () => {
   });
   const [allWorkspaces, setAllWorkspaces] = useState([]);
   const [isClick, setIsClick] = useState(false);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -39,10 +37,10 @@ const WorkspaceDetailsPage = () => {
       .catch((err) => {
         console.log(err);
       });
-    setEditedWorkspace((prev) => ({
-      ...prev,
-      members: [],
-    }));
+    // setEditedWorkspace((prev) => ({
+    //   ...prev,
+    //   members: [...members],
+    // }));
   }, []);
 
   const handleTextInput = (e) => {
@@ -64,6 +62,9 @@ const WorkspaceDetailsPage = () => {
       .put(`${SERVER_URL}/workspaces/${workspaceId}`, editedWorkspace)
       .then((response) => {
         const udpdatedWorkspaces = allWorkspaces.map((workspace) => {
+          console.log("inside the map");
+          console.log("workspace => ", workspace);
+          console.log("response data => ", response.data);
           return workspace._id === editedWorkspace._id
             ? response.data
             : workspace;
@@ -74,6 +75,7 @@ const WorkspaceDetailsPage = () => {
   };
 
   const handleAdd = () => {
+    handleUpdate();
     setEditedWorkspace((prev) => ({
       ...prev,
       members: [...prev.members, newMember],
@@ -81,12 +83,8 @@ const WorkspaceDetailsPage = () => {
     setNewMember({ memberName: "", memberEmail: "" });
   };
 
-  useEffect(() => {
-    handleUpdate();
-  }, [editedWorkspace]);
+  console.log("edited workspace => ", editedWorkspace);
 
-  console.log(editedWorkspace);
-  console.log(newMember);
   return (
     <>
       {editedWorkspace && (
@@ -108,40 +106,49 @@ const WorkspaceDetailsPage = () => {
           >
             <h4>General</h4>
 
-            <Form.Group className="mb-3">
-              <Form.Label>
-                <div>Workspace name</div>
-              </Form.Label>
-              <Form.Control
-                type="text"
-                name="name"
-                value={editedWorkspace.name}
-                onChange={handleTextInput}
-                required
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>
-                <div>Workspace URL</div>
-              </Form.Label>
-              <Form.Control
-                type="text"
-                name="workspaceURL"
-                value={editedWorkspace.workspaceURL}
-                onChange={handleTextInput}
-                required
-              />
-            </Form.Group>
-            <Button
-              variant="primary"
-              className="update-button"
-              onClick={() => {
-                handleUpdate();
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "50vw",
               }}
             >
-              Update
-            </Button>
+              <Form.Group className="mb-3">
+                <Form.Label>
+                  <div>Workspace name</div>
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  name="name"
+                  value={editedWorkspace.name}
+                  onChange={handleTextInput}
+                  required
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3">
+                <Form.Label>
+                  <div>Workspace URL</div>
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  name="workspaceURL"
+                  value={editedWorkspace.workspaceURL}
+                  onChange={handleTextInput}
+                  required
+                />
+              </Form.Group>
+
+              <Button
+                className="update-button"
+                onClick={() => {
+                  handleUpdate();
+                }}
+              >
+                Update
+              </Button>
+            </div>
           </div>
 
           <div className="horizontal-line"></div>
@@ -155,45 +162,53 @@ const WorkspaceDetailsPage = () => {
           >
             <h4>Members</h4>
 
-            <div>Workspace members</div>
             <div
               style={{
                 display: "flex",
-                alignItems: "flex-end",
-                gap: "400px",
-                padding: "20px",
+                gap: "80px",
+                alignItems: "center",
+                justifyContent: "space-between",
+                width: "50vw",
               }}
             >
-              {editedWorkspace.members.length > 0 && (
-                <div>
-                  {editedWorkspace.members.map((member, index) => {
-                    return (
-                      <div
-                        key={index}
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                        }}
-                      >
-                        <div>{member.memberName}</div>
-                        <div style={{ color: "rgb(133, 134, 153)" }}>
-                          {member.memberEmail}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-              <Button
-                variant="primary"
-                className="update-button"
-                onClick={() => {
-                  setIsClick(!isClick);
+              <div>Workspace members</div>
+              <div>
+                <Button
+                  className="add-member-button"
+                  onClick={() => {
+                    setIsClick(!isClick);
+                  }}
+                >
+                  Add member
+                </Button>
+              </div>
+            </div>
+            {editedWorkspace.members.length > 0 && (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
                 }}
               >
-                Add member
-              </Button>
-            </div>
+                {editedWorkspace.members.map((member, index) => {
+                  return (
+                    <div
+                      key={index}
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                      }}
+                    >
+                      <div>{member.memberName}</div>
+                      <div style={{ color: "rgb(133, 134, 153)" }}>
+                        {member.memberEmail}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </div>
       )}

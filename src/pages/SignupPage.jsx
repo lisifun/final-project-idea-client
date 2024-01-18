@@ -49,7 +49,7 @@ const Signup = () => {
               onChange={handleTextInput}
               required
             ></input>
-            <label className="label" for="fullName">
+            <label className="label" htmlFor="fullName">
               Full name
             </label>
           </form>
@@ -65,7 +65,7 @@ const Signup = () => {
               onChange={handleTextInput}
               required
             ></input>
-            <label className="label" for="username">
+            <label className="label" htmlFor="username">
               Username
             </label>
           </form>
@@ -81,7 +81,7 @@ const Signup = () => {
               onChange={handleTextInput}
               required
             ></input>
-            <label className="label" for="email">
+            <label className="label" htmlFor="email">
               Email adress
             </label>
           </form>
@@ -97,7 +97,7 @@ const Signup = () => {
               onChange={handleTextInput}
               required
             ></input>
-            <label className="label" for="password">
+            <label className="label" htmlFor="password">
               Password
             </label>
           </form>

@@ -1,12 +1,7 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { SERVER_URL } from "../services/SERVER_URL";
+import { Link } from "react-router-dom";
 
-const TicketCard = ({ ticket, iconStatus }) => {
-  // const workspaceId = useParams();
+const TicketCard = ({ ticket, iconStatus, currentWorkspace }) => {
   const { workspace, priority, title, label, _id, assignee } = ticket;
-  const [selectedWorkspace, setSelectedWorkspace] = useState(null);
 
   const priorityIcons = {
     "no-priority": (
@@ -123,17 +118,6 @@ const TicketCard = ({ ticket, iconStatus }) => {
     improvement: "blue",
   };
 
-  useEffect(() => {
-    axios
-      .get(`${SERVER_URL}/workspaces/${workspace}`)
-      .then((response) => {
-        setSelectedWorkspace(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
   return (
     <>
       {ticket && (
@@ -143,8 +127,8 @@ const TicketCard = ({ ticket, iconStatus }) => {
         >
           <div className="ticket-card-left">
             <div>{priorityIcons[priority]}</div>
-            {selectedWorkspace && (
-              <div>{selectedWorkspace.name.slice(0, 2).toUpperCase()}</div>
+            {currentWorkspace.name && (
+              <div>{currentWorkspace.name.slice(0, 2).toUpperCase()}</div>
             )}
             <div>{iconStatus}</div>
             <div className="ticket-title">{title}</div>

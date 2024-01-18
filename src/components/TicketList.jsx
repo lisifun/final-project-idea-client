@@ -1,15 +1,12 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { SERVER_URL } from "../services/SERVER_URL";
-import TicketCard from "./TicketCard";
 
-const TicketList = ({ filteredTickets }) => {
+import TicketCard from "./TicketCard";
+import WelcomeModal from "./WelcomeModal";
+
+const TicketList = ({ filteredTickets, currentWorkspace, setShowModal }) => {
   const doneTickets = filteredTickets.filter((ticket) => {
     return ticket.status === "done";
   });
-
-
-  
 
   const doneIcon = (
     <svg
@@ -157,7 +154,12 @@ const TicketList = ({ filteredTickets }) => {
           </div>
           {doneTickets.map((ticket, index) => {
             return (
-              <TicketCard ticket={ticket} key={index} iconStatus={doneIcon} />
+              <TicketCard
+                ticket={ticket}
+                key={index}
+                iconStatus={doneIcon}
+                currentWorkspace={currentWorkspace}
+              />
             );
           })}
         </>
@@ -172,7 +174,12 @@ const TicketList = ({ filteredTickets }) => {
           </div>
           {inReviewTickets.map((ticket, index) => {
             return (
-              <TicketCard ticket={ticket} key={index} iconStatus={reviewIcon} />
+              <TicketCard
+                ticket={ticket}
+                key={index}
+                iconStatus={reviewIcon}
+                currentWorkspace={currentWorkspace}
+              />
             );
           })}
         </>
@@ -191,6 +198,7 @@ const TicketList = ({ filteredTickets }) => {
                 ticket={ticket}
                 key={index}
                 iconStatus={progressIcon}
+                currentWorkspace={currentWorkspace}
               />
             );
           })}
@@ -206,11 +214,25 @@ const TicketList = ({ filteredTickets }) => {
           </div>
           {todoTickets.map((ticket, index) => {
             return (
-              <TicketCard ticket={ticket} key={index} iconStatus={todoIcon} />
+              <TicketCard
+                ticket={ticket}
+                key={index}
+                iconStatus={todoIcon}
+                currentWorkspace={currentWorkspace}
+              />
             );
           })}
         </>
       )}
+
+      {/* {doneTickets.length === 0 &&
+        inReviewTickets.length === 0 &&
+        inProgressTickets.length === 0 &&
+        todoTickets.length === 0 && (
+          <>
+            <WelcomeModal setShowModal={setShowModal} />
+          </>
+        )} */}
     </div>
   );
 };

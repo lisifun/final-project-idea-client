@@ -55,10 +55,7 @@ function App() {
             element={<WorkspaceDetailsPage />}
           ></Route>
         </Route>
-
-        {/* <Footer /> */}
       </Routes>
-      {/* <Footer /> */}
     </>
   );
 }

@@ -4,22 +4,23 @@ import { useNavigate, useParams } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 
 const DropdownTicketOptions = ({ selectedTicket, onDelete }) => {
-  const workspaceId = useParams();
+  const { workspaceId } = useParams();
   const navigate = useNavigate();
   return (
-    <Dropdown className="dropdown-ticket-options" style={{ width: "2vw" }}>
+    <Dropdown>
       <Dropdown.Toggle id="options">
         <i className="fas fa-ellipsis-v"></i>
       </Dropdown.Toggle>
 
       <Dropdown.Menu className="dropdown-ticket-options">
-        <Dropdown.Item>
+        <Dropdown.Item style={{ color: "rgb(238, 239, 252)" }}>
           <i className="fas fa-link"></i> Add link
         </Dropdown.Item>
-        <Dropdown.Item>
+        <Dropdown.Item style={{ color: "rgb(238, 239, 252)" }}>
           <i className="fas fa-star"></i> Favorite
         </Dropdown.Item>
         <Dropdown.Item
+          style={{ color: "rgb(238, 239, 252)" }}
           onClick={() => {
             onDelete(selectedTicket._id);
             navigate(`/dashboard/${workspaceId}`);

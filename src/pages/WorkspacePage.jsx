@@ -1,6 +1,6 @@
-import axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { SERVER_URL } from "../services/SERVER_URL";
 
 import Button from "react-bootstrap/Button";
@@ -8,26 +8,32 @@ import { AuthContext } from "../context/auth.context";
 
 const WorkspacePage = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [allWorkspaces, setAllWorkspaces] = useState([]);
   const [newWorkspace, setNewWorkspace] = useState({
     name: "",
     workspaceURL: "",
     createdBy: "",
+    members: [],
   });
-  const [createdWorkspaceId, setCreatedWorkspaceId] = useState(null);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
-      setNewWorkspace((prev) => ({ ...prev, createdBy: user._id }));
+      setNewWorkspace((prev) => ({
+        ...prev,
+        createdBy: user._id,
+      }));
+      setNewWorkspace((prev) => ({
+        ...prev,
+        members: [{ memberName: user.fullName, memberEmail: user.email }],
+      }));
     }
   }, [user]);
 
   useEffect(() => {
     axios
-      .get(SERVER_URL + "/workspaces")
+      .get(`${SERVER_URL}/workspaces`)
       .then((response) => {
         setAllWorkspaces(response.data);
       })
@@ -36,26 +42,25 @@ const WorkspacePage = () => {
       });
   }, []);
 
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post(
+        `${SERVER_URL}/workspaces`,
+        newWorkspace
+      );
+
+      const newWorkspaceId = response.data._id;
+
+      setAllWorkspaces([response.data, ...allWorkspaces]);
+      navigate(`/dashboard/${newWorkspaceId}`);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const handleTextInput = (e) => {
     setNewWorkspace((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-
-  const handleSubmit = (e) => {
-    axios
-      .post(`${SERVER_URL}/workspaces`, newWorkspace)
-      .then((response) => {
-        setAllWorkspaces([response.data, ...allWorkspaces]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  useEffect(() => {
-    if (allWorkspaces.length > 0) {
-      setCreatedWorkspaceId(allWorkspaces[0]._id);
-    }
-  }, [allWorkspaces]);
 
   return (
     <div className="workspace-page">
@@ -73,7 +78,7 @@ const WorkspacePage = () => {
               onChange={handleTextInput}
               required
             ></input>
-            <label className="label" for="name">
+            <label className="label" htmlFor="name">
               Workspace Name
             </label>
           </form>
@@ -89,7 +94,7 @@ const WorkspacePage = () => {
               onChange={handleTextInput}
               required
             ></input>
-            <label className="label" for="workspaceURL">
+            <label className="label" htmlFor="workspaceURL">
               Workspace URL
             </label>
           </form>
@@ -98,12 +103,9 @@ const WorkspacePage = () => {
 
       <Button
         className="workspace-button"
-        type="submit"
-        onClick={() => {
-          handleSubmit();
-          navigate(`/dashboard/${createdWorkspaceId}`);
-        }}
         variant="primary"
+        type="submit"
+        onClick={handleSubmit}
       >
         Create workspace
       </Button>

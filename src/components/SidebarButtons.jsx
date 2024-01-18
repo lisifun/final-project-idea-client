@@ -17,7 +17,7 @@ const SidebarButtons = () => {
     >
       <Button variant="primary" className="inbox-button">
         <svg
-          class="sc-kzsNgN fqUWWC"
+          classNme="sc-kzsNgN fqUWWC"
           width="16"
           height="16"
           viewBox="0 0 16 16"

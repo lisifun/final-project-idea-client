@@ -3,7 +3,7 @@ import React from "react";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
 
-const SidebarAccordion = ({ allWorkspaces }) => {
+const SidebarAccordion = ({ currentWorkspace }) => {
   return (
     <div>
       <Accordion
@@ -19,7 +19,7 @@ const SidebarAccordion = ({ allWorkspaces }) => {
             <Accordion defaultActiveKey="0" className="accordion">
               <Accordion.Item eventKey="0" className="accordion-item">
                 <Accordion.Header className="accordion-header">
-                  {allWorkspaces[0].name}
+                  {currentWorkspace.name}
                 </Accordion.Header>
                 <Accordion.Body>
                   <div>
@@ -48,7 +48,7 @@ const SidebarAccordion = ({ allWorkspaces }) => {
                       </svg>
                       Projects
                     </Button>
-                    <Button variant="primary" className="views-button">
+                    <Button variant="primary" className="view-button">
                       <svg
                         width="16"
                         height="16"

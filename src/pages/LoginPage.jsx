@@ -60,7 +60,7 @@ const Login = () => {
               onChange={handleTextInput}
               required
             ></input>
-            <label className="label" for="email">
+            <label className="label" htmlFor="email">
               Email adress
             </label>
           </form>
@@ -76,7 +76,7 @@ const Login = () => {
               onChange={handleTextInput}
               required
             ></input>
-            <label className="label" for="password">
+            <label className="label" htmlFor="password">
               Password
             </label>
           </form>

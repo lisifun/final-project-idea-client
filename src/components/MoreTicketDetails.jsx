@@ -10,7 +10,7 @@ const MoreTicketDetails = ({
   editedTicket,
   setEditedTicket,
   onChange,
-  selectedWorkspace,
+  currentWorkspace,
 }) => {
   // const handleSelect = (e) => {
   //   setEditedTicket((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -62,18 +62,6 @@ const MoreTicketDetails = ({
               handleLabelSelect={handleLabelSelect}
               defaultValue={editedTicket.label}
             />
-            {/* <Form.Select
-              name="label"
-              id="label"
-              onChange={handleSelect}
-              style={{ width: "6vw" }}
-              value={editedTicket.label}
-              defaultValue={selectedTicket.label}
-            >
-              <option value="Bug">Bug</option>
-              <option value="Feature">Feature</option>
-              <option value="Improvement">Improvement</option>
-            </Form.Select> */}
           </div>
 
           <div className="ticket-detail-select">
@@ -81,7 +69,7 @@ const MoreTicketDetails = ({
             <DropdownMember
               handleMemberSelect={handleMemberSelect}
               defaultValue={editedTicket.assignee}
-              selectedWorkspace={selectedWorkspace}
+              currentWorkspace={currentWorkspace}
             />
           </div>
         </div>

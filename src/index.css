@@ -75,6 +75,7 @@ body {
 }
 
 .dropdown-menu-contact,
+.dropdown-ticket-options,
 .dropdown-user,
 .dropdown-workspace {
   padding: 24px;
@@ -109,6 +110,7 @@ body {
 .logout-button,
 .getstarted-button,
 .update-button,
+.add-member-button,
 .edit-button,
 .delete-button,
 .comment-button,
@@ -117,7 +119,8 @@ body {
 .status-button,
 .labels-button,
 .priority-button,
-.create-ticket-button {
+.create-ticket-button,
+.create-new-ticket-button {
   background-color: #5c6ad2;
   border: #5c6ad2;
   cursor: pointer;
@@ -128,6 +131,7 @@ body {
 .logout-button:hover,
 .getstarted-button:hover,
 .update-button:hover,
+.add-member-button:hover,
 .edit-button:hover,
 .delete-button:hover,
 .comment-button:hover,
@@ -136,7 +140,8 @@ body {
 .status-button:hover,
 .labels-button:hover,
 .priority-button:hover,
-.create-ticket-button:hover {
+.create-ticket-button:hover,
+.create-new-ticket-button:hover {
   background-color: #6b7bf1;
 }
 
@@ -151,6 +156,7 @@ body {
 .active-button,
 .backlog-button,
 .projects-button,
+.view-button,
 .bug-button,
 .feature-button,
 .improvement-button,
@@ -161,10 +167,31 @@ body {
 .low-button {
   background-color: transparent;
   border: transparent;
-  width: 10vw;
+  /* width: 10vw; */
   display: flex;
   gap: 8px;
   align-items: center;
+}
+
+.inbox-button,
+.mytickets-button,
+.roadmaps-button,
+.views-button {
+  width: 250px;
+}
+
+.tickets-button,
+.active-button,
+.backlog-button,
+.projects-button,
+.view-button {
+  width: 200px;
+}
+
+.import-tickets-button,
+.invite-people-button,
+.cycles-button {
+  width: 220px;
 }
 
 .inbox-button:hover,
@@ -185,11 +212,34 @@ body {
 .urgent-button:hover,
 .high-button:hover,
 .medium-button:hover,
-.low-button:hover {
+.low-button:hover,
+.view-button:hover {
   background-color: #262736;
   border: 0.5px solid #262736;
 }
 
+.bug-button.active,
+.feature-button.active,
+.improvement-button.active,
+.no-priority-button.active,
+.urgent-button.active,
+.high-button.active,
+.medium-button.active,
+.low-button.active {
+  background-color: #262736;
+  border: 0.5px solid #262736;
+}
+
+/* .btn.active {
+  background-color: #262736;
+  border: 0.5px solid #262736;
+} */
+
+.new-ticket-button {
+  width: 200px;
+  display: flex;
+  justify-content: flex-start;
+}
 .new-ticket-button,
 .search-button,
 .status-filter,
@@ -223,7 +273,6 @@ body {
 
   gap: 40px;
   padding: 128px;
-  border-bottom: 0.5px solid #3b3c48;
 }
 
 .heading {
@@ -351,8 +400,10 @@ body {
 }
 
 .modal-ticket {
-  bottom: 600px;
-  left: 500px;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border-radius: 16px;
   padding: 32px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -365,13 +416,29 @@ body {
   border: 0.5px solid #3b3c48;
 }
 
-.modal-member {
-  bottom: 600px;
-  left: 50px;
-  border-radius: 16px;
+.modal-welcome {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #262733;
+  border: 0.5px solid #3b3c48;
   padding: 32px;
+  border-radius: 16px;
+  width: 450px;
+}
+
+.modal-member {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 280px;
+  width: 500px;
+
+  border-radius: 16px;
+  padding: 24px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  width: 24vw;
   background-color: #262733;
   border: 0.5px solid #3b3c48;
 }

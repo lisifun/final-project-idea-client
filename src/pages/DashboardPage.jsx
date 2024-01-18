@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useContext } from "react";
-import { AuthContext } from "../context/auth.context";
 
 import Sidebar from "../components/Sidebar";
 import TicketList from "../components/TicketList";
@@ -10,18 +8,30 @@ import DashboardFilter from "../components/DashboardFilter";
 import { useParams } from "react-router-dom";
 
 const DashboardPage = () => {
-  const { user } = useContext(AuthContext);
+  const { workspaceId } = useParams();
 
+  const [showModal, setShowModal] = useState(false);
+  const [currentWorkspace, setCurrentWorkspace] = useState([]);
   const [allWorkspaces, setAllWorkspaces] = useState([]);
   const [allTickets, setAllTickets] = useState([]);
   const [filteredTickets, setFilteredTickets] = useState([]);
-  const { workspaceId } = useParams();
 
   useEffect(() => {
     axios
       .get(`${SERVER_URL}/workspaces`)
       .then((response) => {
         setAllWorkspaces(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`${SERVER_URL}/workspaces/${workspaceId}`)
+      .then((response) => {
+        setCurrentWorkspace(response.data);
       })
       .catch((err) => {
         console.log(err);
@@ -44,16 +54,28 @@ const DashboardPage = () => {
     <div className="dashboard-page">
       {allWorkspaces.length > 0 && (
         <div style={{ display: "flex" }}>
-          <Sidebar workspaceId={workspaceId} />
+          <Sidebar
+            setFilteredTickets={setFilteredTickets}
+            allTickets={allTickets}
+            setAllTickets={setAllTickets}
+            allWorkspaces={allWorkspaces}
+            currentWorkspace={currentWorkspace}
+            showModal={showModal}
+            setShowModal={setShowModal}
+          />
 
-          <TicketList filteredTickets={filteredTickets} />
+          <TicketList
+            allTickets={allTickets}
+            filteredTickets={filteredTickets}
+            currentWorkspace={currentWorkspace}
+            setShowModal={setShowModal}
+          />
 
           <DashboardFilter
             workspaceId={workspaceId}
-            allWorkspaces={allWorkspaces}
             allTickets={allTickets}
-            filteredTickets={filteredTickets}
             setFilteredTickets={setFilteredTickets}
+            currentWorkspace={currentWorkspace}
           />
         </div>
       )}
