@@ -4,7 +4,6 @@ import TicketCard from "./TicketCard";
 import WelcomeModal from "./WelcomeModal";
 
 const TicketList = ({ filteredTickets, currentWorkspace, setShowModal }) => {
-  console.log("line 8 on TicketList => filteredTickets", filteredTickets);
   const doneTickets = filteredTickets.filter((ticket) => {
     return ticket.status === "done";
   });

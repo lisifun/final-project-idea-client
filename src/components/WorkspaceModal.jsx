@@ -10,8 +10,9 @@ const WorkspaceModal = ({
   handleAdd,
   isClick,
   setIsClick,
-  handleUpdate,
 }) => {
+  console.log("line 17 => ", editedWorkspace);
+  console.log(newMember);
   return (
     <div>
       <Modal.Dialog className="modal-member">
@@ -82,7 +83,8 @@ const WorkspaceModal = ({
             variant="primary"
             className="create-ticket-button"
             onClick={() => {
-              handleUpdate();
+              handleAdd();
+              setIsClick(false);
             }}
             style={{ marginRight: "28px" }}
           >

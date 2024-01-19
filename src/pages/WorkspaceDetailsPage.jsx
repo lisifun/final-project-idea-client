@@ -53,12 +53,12 @@ const WorkspaceDetailsPage = () => {
     }));
   };
 
-  const handleUpdate = () => {
+  const handleUpdate = (selectedWorkspace) => {
     axios
-      .put(`${SERVER_URL}/workspaces/${workspaceId}`, editedWorkspace)
+      .put(`${SERVER_URL}/workspaces/${workspaceId}`, selectedWorkspace)
       .then((response) => {
         const udpdatedWorkspaces = allWorkspaces.map((workspace) => {
-          return workspace._id === editedWorkspace._id
+          return workspace._id === selectedWorkspace._id
             ? response.data
             : workspace;
         });
@@ -68,16 +68,13 @@ const WorkspaceDetailsPage = () => {
   };
 
   const handleAdd = () => {
-    setEditedWorkspace(
-      (prev) => ({
-        ...prev,
-        members: [...prev.members, newMember],
-      }),
-      () => {
-        handleUpdate();
-        setIsClick(false); // Close the modal after updating
-      }
-    );
+    const newEditedWorkspace = {
+      ...editedWorkspace,
+      members: [...editedWorkspace.members, newMember],
+    };
+    console.log("line 75 => ", newEditedWorkspace);
+    handleUpdate(newEditedWorkspace);
+    setEditedWorkspace(newEditedWorkspace);
 
     setNewMember({ memberName: "", memberEmail: "" });
   };
@@ -140,7 +137,7 @@ const WorkspaceDetailsPage = () => {
               <Button
                 className="update-button"
                 onClick={() => {
-                  handleUpdate();
+                  handleUpdate(editedWorkspace);
                 }}
               >
                 Update

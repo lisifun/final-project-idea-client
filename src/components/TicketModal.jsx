@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { SERVER_URL } from "../services/SERVER_URL";
 
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";

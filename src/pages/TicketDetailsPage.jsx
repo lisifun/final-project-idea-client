@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { SERVER_URL } from "../services/SERVER_URL";
+import { useContext } from "react";
+import { AuthContext } from "../context/auth.context";
 
 import Sidebar from "../components/Sidebar";
 import TicketDetails from "../components/TicketDetails";
@@ -12,6 +14,7 @@ const TicketDetailsPage = () => {
   const { ticketId } = useParams();
 
   console.log("line 14 => TicketDetailsPage", ticketId);
+  const { user, logOutUser } = useContext(AuthContext);
 
   const [allWorkspaces, setAllWorkspaces] = useState([]);
   const [currentWorkspace, setCurrentWorkspace] = useState([]);
@@ -96,14 +99,30 @@ const TicketDetailsPage = () => {
 
   return (
     <div className="ticket-details-page">
-      {selectedTicket._id && (
+      {selectedTicket && (
         <div className="details-page" style={{ display: "flex" }}>
           <Sidebar
             allWorkspaces={allWorkspaces}
+            allTickets={allTickets}
             setAllTickets={setAllTickets}
             currentWorkspace={currentWorkspace}
-            allTickets={allTickets}
+            user={user}
+            logOutUser={logOutUser}
           />
+
+          {/* <Sidebar
+            setFilteredTickets={setFilteredTickets}
+            allTickets={allTickets}
+            setAllTickets={setAllTickets}
+            allWorkspaces={allWorkspaces}
+            currentWorkspace={currentWorkspace}
+            showModal={showModal}
+            setShowModal={setShowModal}
+            user={user}
+            logOutUser={logOutUser}
+            addNewTicket={addNewTicket}
+          /> */}
+
           <TicketDetails
             selectedTicket={selectedTicket}
             editedTicket={editedTicket}

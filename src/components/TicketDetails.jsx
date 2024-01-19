@@ -1,5 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../context/auth.context";
+import axios from "axios";
+import { SERVER_URL } from "../services/SERVER_URL";
 
 import Button from "react-bootstrap/Button";
 import DropdownTicketOptions from "./DropdownTicketOptions";
@@ -13,42 +15,47 @@ const TicketDetails = ({
 }) => {
   // Function to set the time
   function legibleTime(time) {
-    var now = new Date();
-    var timeTest = now - time;
-    var seconds = Math.floor(timeTest / 1000);
-    var minutes = Math.floor(seconds / 60);
-    var hours = Math.floor(minutes / 60);
-    var days = Math.floor(hours / 24);
+    const now = new Date();
+    const timeDifference = now - new Date(time);
+    const seconds = Math.floor(timeDifference / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
 
-    var timePosted;
+    console.log("//////////");
+    console.log("time created the comment => ", time);
+    console.log("current time => ", now);
+    console.log("difference => ", timeDifference);
+    console.log("seconds => ", seconds);
+    console.log("minutes => ", minutes);
+    console.log("hours => ", hours);
+    console.log("days => ", days);
+    console.log("//////////");
+
+    let timePosted;
+
     if (days > 0) {
-      if (days === 1) {
-        timePosted = "1 day ago";
-      } else {
-        timePosted = `${days} days ago`;
-      }
+      timePosted = days === 1 ? "1 day ago" : `${days} days ago`;
     } else if (hours > 0) {
-      if (hours === 1) {
-        timePosted = "1 hour ago";
-      } else {
-        timePosted = `${hours} hours ago`;
-      }
+      timePosted = hours === 1 ? "1 hour ago" : `${hours} hours ago`;
     } else if (minutes > 0) {
-      if (minutes === 1) {
-        timePosted = "1 minute ago";
-      } else {
-        timePosted = `${minutes} minutes ago`;
-      }
+      timePosted = minutes === 1 ? "1 minute ago" : `${minutes} minutes ago`;
     } else {
       timePosted = "Just now";
     }
+
     return timePosted;
   }
 
   const { user } = useContext(AuthContext);
+
   const [newComment, setNewComment] = useState({
     comment: "",
     createdAt: new Date(),
+    createdBy: {
+      username: user.username,
+      photo: user.photo,
+    },
   });
 
   const handleTextInput = (e) => {
@@ -67,6 +74,10 @@ const TicketDetails = ({
     setNewComment({
       comment: "",
       createdAt: new Date(),
+      createdBy: {
+        username: user.username,
+        photo: user.photo,
+      },
     });
   };
 
@@ -107,6 +118,10 @@ const TicketDetails = ({
                   value={editedTicket.description}
                   onChange={handleTextInput}
                   required
+                  style={{
+                    overflowWrap: "break-word", // This property is used for word wrapping in single-line elements
+                    whiteSpace: "normal", // Resetting the white-space property
+                  }}
                 />
               )}
             </form>
@@ -135,7 +150,7 @@ const TicketDetails = ({
                 </div>
                 <br></br>
 
-                {editedTicket.comments.length > 0 && (
+                {editedTicket.comments && (
                   <div
                     style={{
                       display: "flex",
@@ -144,9 +159,16 @@ const TicketDetails = ({
                     }}
                   >
                     {editedTicket.comments.map((comment) => {
+                      console.log("inside of the map");
+                      console.log(comment);
+                      console.log(legibleTime(comment.createdAt));
+                      console.log("at the end of the map");
                       return (
                         <div className="photo-comment">
-                          <img src={user.photo} className="user-photo" />
+                          <img
+                            src={comment.createdBy.photo}
+                            className="user-photo"
+                          />
                           <div
                             style={{
                               display: "flex",
@@ -160,7 +182,7 @@ const TicketDetails = ({
                             }}
                           >
                             <div style={{ display: "flex", gap: "24px" }}>
-                              <div>{user.username}</div>
+                              <div>{comment.createdBy.username}</div>
                               <div style={{ color: "rgb(156, 158, 172)" }}>
                                 {legibleTime(comment.createdAt)}
                               </div>

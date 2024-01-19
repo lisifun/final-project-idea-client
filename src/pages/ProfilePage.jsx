@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import axios from "axios";
+import { SERVER_URL } from "../services/SERVER_URL";
 
 const Profile = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -17,10 +19,21 @@ const Profile = () => {
   };
 
   const updatedUserInfo = () => {
-    // setUser(editedUser);
-    // axios.put(`${SERVER_URL}/auth/login`)
+    axios
+      .put(`${SERVER_URL}/users/${user._id}`, editedUser)
+      .then((response) => {
+        console.log(response.data);
+        const updatedUser = response.data;
+        console.log(updatedUser);
+
+        setUser(updatedUser);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
+  console.log("line 37 => ", editedUser);
   return (
     <>
       {user && (

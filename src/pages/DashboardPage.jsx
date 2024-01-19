@@ -20,6 +20,8 @@ const DashboardPage = () => {
   const [filteredTickets, setFilteredTickets] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  console.log("line 23 => all workspaces => ", allWorkspaces);
+
   useEffect(() => {
     axios
       .get(`${SERVER_URL}/workspaces`)

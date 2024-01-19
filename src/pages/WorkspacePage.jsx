@@ -31,27 +31,29 @@ const WorkspacePage = () => {
     }
   }, [user]);
 
-  useEffect(() => {
-    axios
-      .get(`${SERVER_URL}/workspaces`)
-      .then((response) => {
-        setAllWorkspaces(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`${SERVER_URL}/workspaces`)
+  //     .then((response) => {
+  //       setAllWorkspaces(response.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
-  const handleSubmit = async () => {
+  const addNewWorkspace = async () => {
     try {
       const response = await axios.post(
         `${SERVER_URL}/workspaces`,
-        newWorkspace
+        newWorkspace,
+        { new: true }
       );
 
       const newWorkspaceId = response.data._id;
+      console.log("response.data => ", response.data);
 
-      setAllWorkspaces([response.data, ...allWorkspaces]);
+      setAllWorkspaces([response.data]);
       navigate(`/dashboard/${newWorkspaceId}`);
     } catch (err) {
       console.log(err);
@@ -61,6 +63,9 @@ const WorkspacePage = () => {
   const handleTextInput = (e) => {
     setNewWorkspace((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
+  console.log("user => ", user);
+  console.log("new workspace => ", newWorkspace);
 
   return (
     <div className="workspace-page">
@@ -105,7 +110,7 @@ const WorkspacePage = () => {
         className="workspace-button"
         variant="primary"
         type="submit"
-        onClick={handleSubmit}
+        onClick={addNewWorkspace}
       >
         Create workspace
       </Button>
