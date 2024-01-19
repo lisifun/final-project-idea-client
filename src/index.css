@@ -332,6 +332,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
+
   background-color: #191a23;
 }
 
@@ -341,11 +342,21 @@ body {
   /* gap: px; */
 }
 
+.ticket-card-right {
+  display: flex;
+  gap: 12px;
+}
+
 .ticket-card-left > div {
   width: 2vw;
-  /* border: 1px solid (238, 239, 252); */
   display: flex;
   align-items: center;
+}
+
+.ticket-title {
+  font-weight: 500;
+  font-size: 15px;
+  width: 300px !important;
 }
 
 .ticket-card-right > div {
@@ -379,12 +390,6 @@ body {
   gap: 8px;
   align-items: center;
   color: rgb(238, 239, 252);
-}
-
-.ticket-title {
-  font-weight: 500;
-  font-size: 15px;
-  width: 10vw !important;
 }
 
 .ticket-details-page {

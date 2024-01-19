@@ -54,7 +54,7 @@ const WorkspaceModal = ({
                   style={{ width: "400px " }}
                 ></input>
                 <label className="label" htmlFor="memberName">
-                  Member's name
+                  Member name
                 </label>
               </form>
             </div>
@@ -71,7 +71,7 @@ const WorkspaceModal = ({
                   style={{ width: "400px " }}
                 ></input>
                 <label className="label" htmlFor="memberEmail">
-                  Member's email
+                  Member email
                 </label>
               </form>
             </div>
